@@ -65,6 +65,7 @@ podman run --rm \
 		cargo clippy --locked --workspace --all-targets -- -D warnings
 		cargo test --locked --workspace
 		cargo build --locked --workspace --bins
+		RUSTDOCFLAGS="-D warnings" cargo doc --locked --no-deps
 	' 2>&1 | tee "$out"
 
 echo "validate-app: transcript at ${out#"$ROOT/"}"
