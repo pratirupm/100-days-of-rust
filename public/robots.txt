@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pratirupm.github.io/100-days-of-rust/sitemap-index.xml

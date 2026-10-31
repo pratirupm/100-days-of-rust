@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1
+#
+# The validation image. Everything the Rust app needs to build, test, and
+# inspect itself lives here — never on the host.
+#
+#   podman build -t rust-todo-validator:1.99 \
+#     -f containers/validator/Containerfile containers/validator
+#
+# The tag is pinned to Rust 1.99.0. After the first pull, replace the image
+# reference with its digest so the validation is reproducible.
+FROM docker.io/library/rust:1.99.0-bookworm
+
+RUN rustup component add rustfmt clippy rust-analyzer rust-src \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends git sqlite3 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV CARGO_HOME=/cargo \
+    CARGO_TARGET_DIR=/target \
+    RUST_BACKTRACE=1 \
+    CARGO_TERM_COLOR=never
+
+WORKDIR /src

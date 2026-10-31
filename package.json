@@ -1,0 +1,29 @@
+{
+  "name": "100-days-of-rust",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "bun tools/lint-prose.ts",
+    "verify": "bun tools/verify-quotes.ts",
+    "transcripts": "bun tools/check-transcripts.ts",
+    "appendix": "bun tools/generate-appendix.ts",
+    "days": "bun tools/generate-days.ts",
+    "prefix-base": "bun tools/prefix-base.ts",
+    "icons": "bun tools/icons.ts",
+    "validate:app": "bash tools/validate-app.sh",
+    "reader": "bash tools/reader-run.sh",
+    "check": "bun run lint && bun run verify && bun run transcripts && bun run build"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.6",
+    "@fontsource/noto-sans-symbols-2": "^5.3.0",
+    "astro": "^7.2.10",
+    "sharp": "^0.35.3",
+    "starlight-links-validator": "^0.27.0"
+  }
+}
