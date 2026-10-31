@@ -1,6 +1,6 @@
 ---
 title: "Day 64 — CI matrices and releases"
-description: "Run the gate on more than one target, build artifacts on a tag, and publish checksums with the release. — Day 64 of 100 Days of Rust."
+description: "Run the check on more than one target, build artifacts on a tag, and publish checksums with the release. — Day 64 of 100 Days of Rust."
 sidebar:
   hidden: true
 day: 64
@@ -12,21 +12,21 @@ day: 64
 
 - use a matrix for more than one OS or target;
 - build and upload release artifacts on a tag;
-- keep the gate in front of the publish step.
+- keep the check in front of the publish step.
 
 ---
 
 One runner is a start. A release needs more than one target and an artifact
 that outlives the job.
 
-Today the workflow grows a matrix and a release job. The gate still runs first.
+Today the workflow grows a matrix and a release job. The check still runs first.
 
 ## The matrix
 
 <!-- transcripts: authored -->
 ```yaml
 jobs:
-  gate:
+  check:
     strategy:
       fail-fast: false
       matrix:
@@ -56,7 +56,7 @@ not a second definition of green.
 ```yaml
   release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: gate
+    needs: check
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -72,9 +72,9 @@ not a second definition of green.
             dist/SHA256SUMS
 ```
 
-`needs: gate` makes the release wait for the checks. `if:` limits it to tags
+`needs: check` makes the release wait for the checks. `if:` limits it to tags
 that start with `v`. `permissions: contents: write` is scoped to this job; the
-gate job keeps read-only.
+check job keeps read-only.
 
 The release script builds the archive and the checksum. The action uploads
 both. A consumer downloads the archive and verifies the checksum before
@@ -92,7 +92,7 @@ The exact number is less important than the agreement.
 ## Images in CI
 
 The container image is another artifact. Build it in the release job after the
-gate, tag it with the version and the commit, and push it to a registry. The
+check, tag it with the version and the commit, and push it to a registry. The
 same Dockerfile can be built locally with Podman; CI needs a builder that
 speaks OCI.
 

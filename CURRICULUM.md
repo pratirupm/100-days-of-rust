@@ -97,7 +97,7 @@ same `todo` app. Labs run in Podman; cloud accounts are optional. Days
 | 83–84 | Distributed systems | Retries, idempotency, ordering | Exactly-once exercise | `prod-12` |
 | 85–86 | Observability at scale | Metrics, traces, dashboards | Instrument the extended app | `prod-13` |
 | 87–88 | Performance and load | Profiling, load tests, budgets | Tune the API and database | `prod-14` |
-| 89–90 | Security and supply chain | Threat model, SBOM, secrets | Harden and verify the stack | `prod-15` |
+| 89–90 | Operations and the capstone | SLOs, on-call, backups | Run the whole stack and check the list | `prod-15` |
 
 ## The last 10 — DSA
 

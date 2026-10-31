@@ -32,4 +32,17 @@ them and tie the structures back to the app wherever they fit.
 - **Practice, the interview-shaped kind** — ten problems solved and tested in
   Rust, not in pseudocode.
 
-This is a working list; it firms up as the days are written.
+## The days
+
+- [91 — Complexity and measurement](/100-days-of-rust/days/day-91/)
+- [92 — Vectors and slices underneath](/100-days-of-rust/days/day-92/)
+- [93 — Hash and ordered maps](/100-days-of-rust/days/day-93/)
+- [94 — Stacks, queues, and deques](/100-days-of-rust/days/day-94/)
+- [95 — Linked structures in Rust](/100-days-of-rust/days/day-95/)
+- [96 — Trees and heaps](/100-days-of-rust/days/day-96/)
+- [97 — Graphs: BFS and DFS](/100-days-of-rust/days/day-97/)
+- [98 — Shortest paths and topological sort](/100-days-of-rust/days/day-98/)
+- [99 — Sorting and searching](/100-days-of-rust/days/day-99/)
+- [100 — Interview-shaped practice](/100-days-of-rust/days/day-100/)
+
+All ten days are written, with tests and benchmarks in the `dsa` crate.

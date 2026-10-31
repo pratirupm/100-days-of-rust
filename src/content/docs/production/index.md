@@ -36,6 +36,26 @@ in any order once the app is complete.
 - **Performance and load** — profiling, load tests, and budgets.
 - **Security and supply chain** — threat modeling, SBOMs, secrets, and the
   audit that proves the hardening.
+- **Operations and the capstone** — SLOs, on-call, backups, and a rehearsal of
+  the whole stack.
+
+## The days
+
+- [61 — Containers with Podman](/100-days-of-rust/days/day-61/) · [62 — Pods and local stacks](/100-days-of-rust/days/day-62/)
+- [63 — CI/CD](/100-days-of-rust/days/day-63/) · [64 — CI matrices and releases](/100-days-of-rust/days/day-64/)
+- [65 — PostgreSQL](/100-days-of-rust/days/day-65/) · [66 — PostgreSQL in the app](/100-days-of-rust/days/day-66/)
+- [67 — Redis](/100-days-of-rust/days/day-67/) · [68 — Redis in the app](/100-days-of-rust/days/day-68/)
+- [69 — Kafka and Redpanda](/100-days-of-rust/days/day-69/) · [70 — Task events in the app](/100-days-of-rust/days/day-70/)
+- [71 — gRPC](/100-days-of-rust/days/day-71/) · [72 — gRPC in the app](/100-days-of-rust/days/day-72/)
+- [73 — WebSockets](/100-days-of-rust/days/day-73/) · [74 — Live task updates](/100-days-of-rust/days/day-74/)
+- [75 — Kubernetes](/100-days-of-rust/days/day-75/) · [76 — The app on Kubernetes](/100-days-of-rust/days/day-76/)
+- [77 — AWS with LocalStack](/100-days-of-rust/days/day-77/) · [78 — Backups and jobs in the cloud](/100-days-of-rust/days/day-78/)
+- [79 — Microservices](/100-days-of-rust/days/day-79/) · [80 — The notification service](/100-days-of-rust/days/day-80/)
+- [81 — Distributed systems](/100-days-of-rust/days/day-81/) · [82 — Retries and idempotency in the app](/100-days-of-rust/days/day-82/)
+- [83 — Observability at scale](/100-days-of-rust/days/day-83/) · [84 — Dashboards and alerts for the app](/100-days-of-rust/days/day-84/)
+- [85 — Performance and load](/100-days-of-rust/days/day-85/) · [86 — The optimization pass](/100-days-of-rust/days/day-86/)
+- [87 — Supply chain](/100-days-of-rust/days/day-87/) · [88 — Security incidents](/100-days-of-rust/days/day-88/)
+- [89 — Operations](/100-days-of-rust/days/day-89/) · [90 — The production capstone](/100-days-of-rust/days/day-90/)
 
 ## What you need
 

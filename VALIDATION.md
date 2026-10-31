@@ -48,9 +48,12 @@ smoke test, database migration, and so on).
 
 ## Latest run
 
-- **2026-10-31** — `day-02`, Rust 1.99.0, Podman image `rust-todo-validator:1.99`.
-  `cargo fmt`, `clippy`, `test`, and `build --bins` pass. The gate log is
-  `tools/transcripts/validate-day-02.txt`.
+- **2026-10-31** — `day-100`, Rust 1.99.0, Podman image `rust-todo-validator:1.99`.
+  `cargo fmt`, `clippy`, the full workspace test suite (app and `dsa`), and
+  `cargo doc` pass. The DSA tests and criterion benchmarks are captured in
+  `tools/transcripts/day-91.txt`.
+- **2026-10-31** — `day-02`, Rust 1.99.0. The first build gate passes; the log
+  is `tools/transcripts/validate-day-02.txt`.
 
 ## Status
 
@@ -61,13 +64,13 @@ smoke test, database migration, and so on).
 | Part III — Testing and tooling | 14–19 | complete | 2026-10-31 |
 | Part IV — CLI and persistence | 20–25 | complete | 2026-10-31 |
 | Part V — Concurrency and async | 26–31 | complete | 2026-10-31 |
-| Part VI — The data layer | 32–37 | pending | — |
-| Part VII — The HTTP API | 38–43 | pending | — |
-| Part VIII — The web UI | 44–49 | pending | — |
-| Part IX — The terminal UI | 50–55 | pending | — |
-| Part X — Shipping | 56–60 | pending | — |
-| Production ground | 61–90 | pending | — |
-| Data structures & algorithms | 91–100 | pending | — |
+| Part VI — The data layer | 32–37 | complete | 2026-10-31 |
+| Part VII — The HTTP API | 38–43 | complete | 2026-10-31 |
+| Part VIII — The web UI | 44–49 | complete | 2026-10-31 |
+| Part IX — The terminal UI | 50–55 | complete | 2026-10-31 |
+| Part X — Shipping | 56–60 | complete | 2026-10-31 |
+| Production ground | 61–90 | complete | 2026-10-31 |
+| Data structures & algorithms | 91–100 | complete | 2026-10-31 |
 
 ## What is checked
 

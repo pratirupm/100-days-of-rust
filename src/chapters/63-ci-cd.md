@@ -5,17 +5,17 @@ part: Production ground
 partDay: 3
 partDays: 30
 time: "2 hours"
-description: Put the gate on every push: format, clippy, and the full suite in GitHub Actions, with a cache that makes it fast.
+description: Put the check on every push: format, clippy, and the full suite in GitHub Actions, with a cache that makes it fast.
 bullets:
-  - write a CI workflow that runs the same gate as `make check`;
+  - write a CI workflow that runs the same check as `make check`;
   - cache dependencies and build artifacts;
   - make the check required before a merge.
 ---
 
-The app's gate is a local command. CI is the same command running on someone
+The app's check is a local command. CI is the same command running on someone
 else's machine, on every push, without a human remembering it.
 
-Today the gate becomes a workflow.
+Today the check becomes a workflow.
 
 ## The workflow
 
@@ -47,9 +47,9 @@ jobs:
       - run: cargo test --locked --workspace
 ```
 
-The workflow has the same three commands as the local gate. `--locked` fails if
+The workflow has the same three commands as the local check. `--locked` fails if
 `Cargo.lock` needs an update, so a dependency change must be reviewed. The
-toolchain action installs the stable Rust and the two components the gate uses.
+toolchain action installs the stable Rust and the two components the check uses.
 
 `permissions: contents: read` is the least privilege the job needs. A workflow
 with a broad token is a supply-chain risk; give it only what it uses.
@@ -65,8 +65,8 @@ cold or corrupted, the job still works; it is just slower.
 
 ## Make it required
 
-A workflow that runs but does not block a merge is a notification, not a gate.
-In the repository settings, require the `gate` job for the `main` branch, and
+A workflow that runs but does not block a merge is a notification, not a check.
+In the project settings, require that job for the `main` branch, and
 disallow direct pushes. The branch protection is part of the CI/CD lesson; the
 YAML alone does not enforce it.
 
@@ -77,7 +77,7 @@ release, a container image, a server. The release workflow belongs to the
 delivery half:
 
 - build the binaries on a tag;
-- run the same gate before publishing;
+- run the same check before publishing;
 - publish archives and checksums;
 - deploy the artifact.
 
@@ -86,13 +86,12 @@ uploads the result. The commands are the same; the environment differs.
 
 ## In the app
 
-The workflow does not need the sibling reference repositories. The app's tests
+The workflow does not need the sibling reference projects. The app's tests
 are self-contained; the book's quote and transcript checks stay local because
 they need the private app and captures.
 
-The workflow's job name, `gate`, is the name a branch protection rule selects.
-Changing the name silently un-requires the check; treat the name as part of the
-configuration.
+The workflow's job name is part of the configuration; a branch protection
+rule selects it.
 
 ## If something went wrong
 
@@ -109,10 +108,10 @@ the toolchain in `rust-toolchain.toml` and use the same version in CI.
 to either invalidates it. Check the action's log for the key.
 
 **A fork's pull request gets no secrets.** GitHub withholds secrets from forks.
-The gate must not need them; deploy jobs run only on trusted branches.
+The check must not need them; deploy jobs run only on trusted branches.
 
 **The job is green but the branch is not protected.** Require the check in the
-repository settings; CI cannot protect itself.
+project settings; CI cannot protect itself.
 
 ## Going deeper: the pipeline is a contract
 
@@ -120,7 +119,7 @@ The pipeline encodes the project's definition of "green": format, lints, tests,
 and whatever else the team agrees on. Adding a check is cheap; removing one is
 a decision.
 
-The same gate should run locally and in CI. A local `make check` that differs
+The same check should run locally and in CI. A local `make check` that differs
 from CI produces the worst feedback loop: green locally, red remotely. Keep one
 script or one Makefile target and call it from both.
 
