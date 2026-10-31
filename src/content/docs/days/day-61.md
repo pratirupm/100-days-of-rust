@@ -63,7 +63,7 @@ REPOSITORY    TAG   IMAGE ID      SIZE
 todo-server   0.1   ...           ...
 ```
 
-The build context is the repository root. The `.dockerignore` keeps `target/`
+The build context is the project root. The `.dockerignore` keeps `target/`
 and `.git/` out of the context; otherwise the build uploads gigabytes it does
 not need.
 

@@ -115,6 +115,7 @@ TUI do not change; they depend on the trait, not the SQL dialect.
 The app's current `SqliteStore` stays for local use. The Postgres adapter is
 selected by configuration in a real deployment:
 
+<!-- transcripts: authored -->
 ```text
 TODO_DB=postgres://todo:todo@127.0.0.1:5432/todo
 ```
