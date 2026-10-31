@@ -60,7 +60,7 @@ smoke test, database migration, and so on).
 | Part II — Structure | 8–13 | complete | 2026-10-31 |
 | Part III — Testing and tooling | 14–19 | complete | 2026-10-31 |
 | Part IV — CLI and persistence | 20–25 | complete | 2026-10-31 |
-| Part V — Concurrency and async | 26–31 | pending | — |
+| Part V — Concurrency and async | 26–31 | complete | 2026-10-31 |
 | Part VI — The data layer | 32–37 | pending | — |
 | Part VII — The HTTP API | 38–43 | pending | — |
 | Part VIII — The web UI | 44–49 | pending | — |
