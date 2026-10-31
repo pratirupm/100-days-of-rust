@@ -52,8 +52,9 @@ smoke test, database migration, and so on).
   `cargo fmt`, `clippy`, the full workspace test suite (app and `dsa`), and
   `cargo doc` pass. The DSA tests and criterion benchmarks are captured in
   `tools/transcripts/day-91.txt`.
-- **2026-10-31** — `day-02`, Rust 1.99.0. The first build gate passes; the log
-  is `tools/transcripts/validate-day-02.txt`.
+- **2026-10-31** — `day-60` and `day-02`, Rust 1.99.0. The release tag and the
+  first build tag both pass the same gate; logs are
+  `tools/transcripts/validate-day-60.txt` and `validate-day-02.txt`.
 
 ## Status
 
