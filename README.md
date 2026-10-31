@@ -12,8 +12,9 @@ app to production and goes underneath with data structures and algorithms.
   observability, performance, and supply chain.
 - **Days 91–100:** data structures and algorithms, measured with `criterion`.
 
-All 100 days are written. The site is free, has no sign-up, and installs as an
-offline app.
+The full 100-day plan is fixed in [`CURRICULUM.md`](CURRICULUM.md). Part I is
+written; the remaining days are being built and verified in order. The site is
+free, has no sign-up, and installs as an offline app.
 
 **Read it at [pratirupm.github.io/100-days-of-rust](https://pratirupm.github.io/100-days-of-rust/)**
 
