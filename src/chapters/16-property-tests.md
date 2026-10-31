@@ -47,7 +47,7 @@ use todo::TodoList;
 
 proptest! {
     #[test]
-    fn non_blank_titles_round_trip(title in "[a-zA-Z0-9 ]{1,40}") {
+    fn non_blank_titles_round_trip(title in "[a-zA-Z0-9][a-zA-Z0-9 ]{0,39}") {
         let mut list = TodoList::new();
         let id = list.add(&title).unwrap();
         let stored = &list.find(id).unwrap().title;
@@ -57,8 +57,11 @@ proptest! {
 }
 ```
 
-The string `"[a-zA-Z0-9 ]{1,40}"` is a **strategy**: a recipe for generating
-inputs. It produces one to forty characters from letters, digits, and spaces.
+The string `"[a-zA-Z0-9][a-zA-Z0-9 ]{0,39}"` is a **strategy**: a recipe for
+generating inputs. It produces one to forty characters, starting with a letter
+or digit and then allowing letters, digits, and spaces. The first character is
+non-space on purpose: a title made only of spaces trims to empty and is
+rejected.
 The property creates a fresh list for each generated title, adds it, reads it
 back, and compares.
 
@@ -110,7 +113,7 @@ again.
 $ git add -A
 $ git commit -m "day 16: property-test title round-trips"
 [main (root-commit) ...] day 16: property-test title round-trips
- 21 files changed, 1103 insertions(+)
+ 20 files changed, 1096 insertions(+)
 ...
 $ git log --oneline
 ... day 16: property-test title round-trips
