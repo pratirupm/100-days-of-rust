@@ -46,6 +46,12 @@ cargo build --locked --workspace --bins
 Release and production days add their own checks (static binary, container
 smoke test, database migration, and so on).
 
+## Latest run
+
+- **2026-10-31** — `day-02`, Rust 1.99.0, Podman image `rust-todo-validator:1.99`.
+  `cargo fmt`, `clippy`, `test`, and `build --bins` pass. The gate log is
+  `tools/transcripts/validate-day-02.txt`.
+
 ## Status
 
 | Track | Days | Status | Last checked |
