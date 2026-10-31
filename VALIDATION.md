@@ -56,7 +56,7 @@ smoke test, database migration, and so on).
 
 | Track | Days | Status | Last checked |
 | --- | --- | --- | --- |
-| Part I — Language basics | 1–7 | in progress | — |
+| Part I — Language basics | 1–7 | complete | 2026-10-31 |
 | Part II — Structure | 8–13 | pending | — |
 | Part III — Testing and tooling | 14–19 | pending | — |
 | Part IV — CLI and persistence | 20–25 | pending | — |
