@@ -1,0 +1,137 @@
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+error[E0428]: the name `tests` is defined multiple times
+  --> src/main.rs:81:1
+   |
+51 | mod tests {
+   | --------- previous definition of the module `tests` here
+...
+81 | mod tests {
+   | ^^^^^^^^^ `tests` redefined here
+   |
+   = note: `tests` must be defined only once in the type namespace of this module
+
+error[E0433]: cannot find type `TodoList` in this scope
+  --> src/main.rs:86:24
+   |
+86 |         let mut list = TodoList::new();
+   |                        ^^^^^^^^ use of undeclared type `TodoList`
+
+error[E0433]: cannot find type `TodoList` in this scope
+  --> src/main.rs:95:24
+   |
+95 |         let mut list = TodoList::new();
+   |                        ^^^^^^^^ use of undeclared type `TodoList`
+
+error[E0599]: no method named `clone` found for struct `Task` in the current scope
+  --> src/main.rs:97:29
+   |
+ 4 | struct Task {
+   | ----------- method `clone` not found for this struct
+...
+97 |         let snapshot = task.clone();
+   |                             ^^^^^ method not found in `Task`
+   |
+   = help: items from traits can only be used if the trait is implemented and in scope
+   = note: the following trait defines an item `clone`, perhaps you need to implement it:
+           candidate #1: `Clone`
+
+error[E0433]: cannot find type `TodoList` in this scope
+   --> src/main.rs:109:24
+    |
+109 |         let mut list = TodoList::new();
+    |                        ^^^^^^^^ use of undeclared type `TodoList`
+
+error[E0599]: no method named `clone` found for struct `Task` in the current scope
+   --> src/main.rs:120:29
+    |
+  4 | struct Task {
+    | ----------- method `clone` not found for this struct
+...
+120 |         let mut copy = task.clone();
+    |                             ^^^^^ method not found in `Task`
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `clone`, perhaps you need to implement it:
+            candidate #1: `Clone`
+
+error[E0433]: cannot find type `TodoList` in this scope
+   --> src/main.rs:130:24
+    |
+130 |         let mut list = TodoList::new();
+    |                        ^^^^^^^^ use of undeclared type `TodoList`
+
+Some errors have detailed explanations: E0428, E0433, E0599.
+For more information about an error, try `rustc --explain E0428`.
+error: could not compile `todo` (bin "todo" test) due to 7 previous errors
+warning: build failed, waiting for other jobs to finish...
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.14s
+     Running unittests src/main.rs (/target/debug/deps/todo-d7ab9019339f3460)
+
+running 5 tests
+test tests::add_returns_an_id_and_appends ... ok
+test tests::list_borrows_the_tasks ... ok
+test tests::clone_makes_an_independent_copy ... ok
+test tests::done_marks_a_task_by_id ... ok
+test tests::push_moves_a_task_into_the_list ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/smoke.rs (/target/debug/deps/smoke-c6d39cd1855ea4dc)
+
+running 1 test
+test banner_prints_on_start ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `/target/debug/todo`
+todo — a tiny task manager
+
+Usage:
+  todo              start the interactive list
+  todo add <title>  add a task
+  todo list         list tasks
+
+demo: task 1 added; 3 task(s); first done=true
+$ git add -A
+$ git commit -m "day 4: own the task list"
+[main (root-commit) 22ddc53] day 4: own the task list
+ 6 files changed, 191 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Cargo.lock
+ create mode 100644 Cargo.toml
+ create mode 100644 rust-toolchain.toml
+ create mode 100644 src/main.rs
+ create mode 100644 tests/smoke.rs
+$ git log --oneline
+22ddc53 day 4: own the task list
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+error[E0382]: borrow of moved value: `task`
+   --> src/main.rs:115:24
+    |
+111 |         let task = Task::new(99, "read the book");
+    |             ---- move occurs because `task` has type `Task`, which does not implement the `Copy` trait
+...
+114 |         list.push(task);
+    |                   ---- value moved here
+115 |         println!("{}", task.title);
+    |                        ^^^^^^^^^^ value borrowed here after move
+    |
+note: consider changing this parameter type in method `push` to borrow instead if owning the value isn't necessary
+   --> src/main.rs:57:30
+    |
+ 57 |     fn push(&mut self, task: Task) {
+    |        ---- in this method   ^^^^ this parameter takes ownership of the value
+help: consider cloning the value if the performance cost is acceptable
+    |
+114 |         list.push(task.clone());
+    |                       ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `todo` (bin "todo" test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
