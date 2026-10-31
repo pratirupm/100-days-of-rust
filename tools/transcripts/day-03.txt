@@ -1,0 +1,101 @@
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+warning: unused import: `super::*`
+ --> src/main.rs:9:9
+  |
+9 |     use super::*;
+  |         ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0433]: cannot find type `Task` in this scope
+  --> src/main.rs:13:20
+   |
+13 |         let task = Task::new(1, "buy milk");
+   |                    ^^^^ use of undeclared type `Task`
+
+error[E0433]: cannot find type `Status` in this scope
+  --> src/main.rs:16:33
+   |
+16 |         assert_eq!(task.status, Status::Pending);
+   |                                 ^^^^^^ use of undeclared type `Status`
+
+error[E0433]: cannot find type `Task` in this scope
+  --> src/main.rs:22:24
+   |
+22 |         let mut task = Task::new(2, "write the report");
+   |                        ^^^^ use of undeclared type `Task`
+
+error[E0433]: cannot find type `Status` in this scope
+  --> src/main.rs:25:33
+   |
+25 |         assert_eq!(task.status, Status::Done);
+   |                                 ^^^^^^ use of undeclared type `Status`
+
+error[E0433]: cannot find type `Task` in this scope
+  --> src/main.rs:31:20
+   |
+31 |         let task = Task::new(3, &title);
+   |                    ^^^^ use of undeclared type `Task`
+
+For more information about this error, try `rustc --explain E0433`.
+warning: `todo` (bin "todo" test) generated 1 warning
+error: could not compile `todo` (bin "todo" test) due to 5 previous errors; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.32s
+     Running unittests src/main.rs (/target/debug/deps/todo-d7ab9019339f3460)
+
+running 3 tests
+test tests::done_marks_the_task_done ... ok
+test tests::new_task_is_pending ... ok
+test tests::title_is_owned_by_the_task ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/smoke.rs (/target/debug/deps/smoke-c6d39cd1855ea4dc)
+
+running 1 test
+test banner_prints_on_start ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `/target/debug/todo`
+todo — a tiny task manager
+
+Usage:
+  todo              start the interactive list
+  todo add <title>  add a task
+  todo list         list tasks
+
+demo: task 1 "buy milk" done=true
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.gitignore
+	Cargo.lock
+	Cargo.toml
+	rust-toolchain.toml
+	src/
+	tests/
+
+nothing added to commit but untracked files present (use "git add" to track)
+$ git add -A
+$ git commit -m "day 3: add the task model"
+[main (root-commit) ab8c40c] day 3: add the task model
+ 6 files changed, 117 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Cargo.lock
+ create mode 100644 Cargo.toml
+ create mode 100644 rust-toolchain.toml
+ create mode 100644 src/main.rs
+ create mode 100644 tests/smoke.rs
+$ git log --oneline
+ab8c40c day 3: add the task model
