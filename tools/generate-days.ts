@@ -54,7 +54,9 @@ function parseFrontmatter(text: string): { front: Front; body: string } {
 	return { front, body };
 }
 
-const files = (await readdir(CHAPTERS)).filter((f) => f.endsWith('.md')).sort();
+const files = (await readdir(CHAPTERS))
+	.filter((f) => f.endsWith('.md'))
+	.sort((a, b) => Number.parseInt(a, 10) - Number.parseInt(b, 10));
 const pages: { day: number; text: string }[] = [];
 
 for (const file of files) {
