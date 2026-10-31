@@ -47,6 +47,13 @@ $ podman exec -it todo-pg psql -U todo -d todo
 ```
 
 ```sql
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL
+);
+
 CREATE TABLE tasks (
     id BIGSERIAL PRIMARY KEY,
     uuid TEXT NOT NULL UNIQUE,
@@ -58,7 +65,16 @@ CREATE TABLE tasks (
 );
 
 CREATE INDEX tasks_owner_status_idx ON tasks (owner_id, status);
+
+CREATE TABLE sessions (
+    token_hash TEXT PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users (id),
+    expires_at TIMESTAMPTZ NOT NULL
+);
 ```
+
+The users table comes first because `tasks.owner_id` and `sessions.user_id`
+reference it. A foreign key to a table that does not exist yet fails.
 
 `BIGSERIAL` is a 64-bit auto-incrementing key. `TIMESTAMPTZ` stores an instant,
 not a local wall clock. `JSONB` stores the tags as binary JSON and can index
@@ -69,24 +85,7 @@ The composite index matches the app's most common query: a user's tasks
 filtered by status. The order of the columns matters; `owner_id` first, then
 `status`.
 
-## Users and sessions
-
-The users and sessions tables follow the same shape as SQLite:
-
-```sql
-CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL
-);
-
-CREATE TABLE sessions (
-    token_hash TEXT PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES users (id),
-    expires_at TIMESTAMPTZ NOT NULL
-);
-```
+## Sessions
 
 The session query compares `expires_at > now()`, not a string. Postgres knows
 time; let it do the comparison.

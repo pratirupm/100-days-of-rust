@@ -12,11 +12,17 @@ reviewed the result, but the words you are reading were not written by a
 person.
 
 What *was* real: the application the book teaches was actually built, test
-after test, inside a pinned Podman container. Every command and every line of
-output shown in these pages was executed and captured from a real run, and the
-book's claims about the code were checked against that application. The text
-is AI-written — the transcripts are not.
+after test, inside a pinned Podman container. The application lessons (Days
+1–60) and the data-structures crate (Days 91–100) were executed and their
+outputs captured.
 
+The production lessons (Days 61–90) are written as local Podman labs: the
+PostgreSQL, Redis, and LocalStack steps were run against real containers, while
+the Kafka, gRPC, WebSocket, and Kubernetes steps depend on optional tooling and
+are documented rather than pre-run.
+
+Code quotes are checked against the app at the day's tag. The text is
+AI-written; the captured transcripts are not.
 Read it accordingly. It is a good-faith, carefully verified course, and it is
 also machine-written prose: if something reads oddly, or a claim disagrees
 with your own run, trust your run — and the official documentation.

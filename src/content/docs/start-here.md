@@ -103,10 +103,15 @@ and tags when they become useful. It never assumes you already know git.
 
 ## How the book was checked
 
-Every command and every line of output in the lessons was run in a pinned
+The application lessons and the data-structures crate were run in a pinned
 Podman container against the reference application. Code quotes are checked
 against the app at the day's tag; terminal blocks are checked against captured
-runs. The prose is machine-written, but the commands are not invented —
-[the disclaimer](/100-days-of-rust/disclaimer/) explains what that means.
+runs.
+
+The production lessons are local Podman labs: PostgreSQL, Redis, and LocalStack
+were run for real, while Kafka, gRPC, WebSocket, and Kubernetes depend on
+optional tooling. The prose is machine-written, but the commands are not
+invented — [the disclaimer](/100-days-of-rust/disclaimer/) explains what that
+means.
 
 Ready? [Day 1 — A crate, a save point](/100-days-of-rust/days/day-01/) is next.
