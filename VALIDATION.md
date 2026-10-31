@@ -73,6 +73,21 @@ smoke test, database migration, and so on).
 | Production ground | 61–90 | complete | 2026-10-31 |
 | Data structures & algorithms | 91–100 | complete | 2026-10-31 |
 
+## Production lab checks
+
+- **2026-10-31** — PostgreSQL 17 (Podman, `postgres:17-alpine`). The Day 65
+  schema applies in order: users, tasks, index, sessions. A join over tasks and
+  users returned the inserted row.
+- **2026-10-31** — Redis 7 (Podman, `redis:7-alpine`). `SET ... EX`, `TTL`,
+  `GET`, `INCR`, and `EXPIRE` returned the values shown in Day 67.
+- **2026-10-31** — LocalStack 4.13 (Podman). The Day 77 S3 bucket, upload,
+  listing, SQS queue, send, and receive commands succeeded against the local
+  endpoint.
+
+Kafka/Redpanda, gRPC, WebSockets, and Kubernetes are written as optional local
+labs; their manifests and commands are not re-run by the book's default check.
+The app chapters and the DSA crate are covered by the gates above.
+
 ## What is checked
 
 - **Quotes** — `bun run verify`: every `<!-- verify: path at=tag -->` block
