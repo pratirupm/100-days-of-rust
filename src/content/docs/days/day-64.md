@@ -6,7 +6,7 @@ sidebar:
 day: 64
 ---
 
-**About 2 hours** · Part Production ground, day 4 of 30.
+**About 2 hours** · Production ground, day 4 of 30.
 
 **You'll be able to:**
 

@@ -6,7 +6,7 @@ sidebar:
 day: 75
 ---
 
-**About 3 hours** · Part Production ground, day 15 of 30.
+**About 3 hours** · Production ground, day 15 of 30.
 
 **You'll be able to:**
 

@@ -72,10 +72,16 @@ for (const file of files) {
 	const hidden = day > 60;
 	const sidebar = hidden ? 'sidebar:\n  hidden: true' : `sidebar:\n  order: ${day}`;
 	const isReview = front.review === 'true';
+	const isPartNumber = front.part ? /^[IVX]+$/.test(front.part) : false;
+	const partLabel = front.part
+		? isPartNumber
+			? `Part ${front.part}`
+			: (front.partName ?? front.part)
+		: '';
 	const about = isReview
-		? `**About ${front.time ?? '1.5 hours'}** · Part ${front.part}, review.`
+		? `**About ${front.time ?? '1.5 hours'}** · ${partLabel}, review.`
 		: front.part
-			? `**About ${front.time ?? '2 hours'}** · Part ${front.part}${front.partDay ? `, day ${front.partDay} of ${front.partDays}` : ''}.`
+			? `**About ${front.time ?? '2 hours'}** · ${partLabel}${front.partDay ? `, day ${front.partDay} of ${front.partDays}` : ''}.`
 			: `**About ${front.time ?? '2 hours'}**.`;
 	const bullets = front.bullets.length
 		? `**You'll be able to:**\n\n${front.bullets.map((b) => `- ${b}`).join('\n')}\n\n---\n\n`

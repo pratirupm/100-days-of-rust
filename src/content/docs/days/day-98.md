@@ -6,7 +6,7 @@ sidebar:
 day: 98
 ---
 
-**About 2.5 hours** · Part DSA, day 8 of 10.
+**About 2.5 hours** · Data structures & algorithms, day 8 of 10.
 
 **You'll be able to:**
 

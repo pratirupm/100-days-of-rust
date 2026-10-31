@@ -6,7 +6,7 @@ sidebar:
 day: 92
 ---
 
-**About 2 hours** · Part DSA, day 2 of 10.
+**About 2 hours** · Data structures & algorithms, day 2 of 10.
 
 **You'll be able to:**
 
