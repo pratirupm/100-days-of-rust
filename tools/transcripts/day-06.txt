@@ -1,0 +1,83 @@
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+error[E0433]: cannot find type `TodoError` in this scope
+   --> src/main.rs:225:45
+    |
+225 |         assert_eq!(Task::new(4, "   "), Err(TodoError::EmptyTitle));
+    |                                             ^^^^^^^^^ use of undeclared type `TodoError`
+
+For more information about this error, try `rustc --explain E0433`.
+error: could not compile `todo` (bin "todo" test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.64s
+     Running unittests src/lib.rs (/target/debug/deps/todo-926f2284998a2667)
+
+running 15 tests
+test store::tests::add_returns_an_id_and_appends ... ok
+test store::tests::blank_title_is_an_error_and_does_not_consume_an_id ... ok
+test store::tests::clone_makes_an_independent_copy ... ok
+test store::tests::find_by_title_is_exact ... ok
+test store::tests::find_mut_changes_the_task ... ok
+test store::tests::find_returns_a_borrow ... ok
+test store::tests::done_marks_a_task_by_id ... ok
+test store::tests::list_borrows_the_tasks ... ok
+test store::tests::push_moves_a_task_into_the_list ... ok
+test task::tests::blank_title_is_rejected ... ok
+test store::tests::tags_are_owned_and_counted ... ok
+test task::tests::done_marks_the_task_done ... ok
+test task::tests::new_task_is_pending ... ok
+test task::tests::title_is_owned_by_the_task ... ok
+test task::tests::title_is_trimmed ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/target/debug/deps/todo-1fd8c7e353971d96)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/smoke.rs (/target/debug/deps/smoke-d9088d6c5bd47866)
+
+running 1 test
+test banner_prints_on_start ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests todo
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `/target/debug/todo`
+todo — a tiny task manager
+
+Usage:
+  todo              start the interactive list
+  todo add <title>  add a task
+  todo list         list tasks
+
+first: buy milk (done=true)
+found: write the report
+demo: 2 task(s); tags={"errand": 1}
+$ git add -A
+$ git commit -m "day 6: return errors and split the crate"
+[main (root-commit) 7eb0eba] day 6: return errors and split the crate
+ 10 files changed, 387 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Cargo.lock
+ create mode 100644 Cargo.toml
+ create mode 100644 rust-toolchain.toml
+ create mode 100644 src/error.rs
+ create mode 100644 src/lib.rs
+ create mode 100644 src/main.rs
+ create mode 100644 src/store.rs
+ create mode 100644 src/task.rs
+ create mode 100644 tests/smoke.rs
+$ git log --oneline
+7eb0eba day 6: return errors and split the crate
