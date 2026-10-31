@@ -1,0 +1,157 @@
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+error[E0599]: no method named `find` found for struct `TodoList` in the current scope
+   --> src/main.rs:127:22
+    |
+ 37 | struct TodoList {
+    | --------------- method `find` not found for this struct
+...
+127 |         assert!(list.find(id).unwrap().is_done());
+    |                      ^^^^ method not found in `TodoList`
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `find`, perhaps you need to implement it:
+            candidate #1: `Iterator`
+
+error[E0599]: no method named `find` found for struct `TodoList` in the current scope
+   --> src/main.rs:157:32
+    |
+ 37 | struct TodoList {
+    | --------------- method `find` not found for this struct
+...
+157 |         let task: &Task = list.find(id).unwrap();
+    |                                ^^^^ method not found in `TodoList`
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `find`, perhaps you need to implement it:
+            candidate #1: `Iterator`
+
+error[E0599]: no method named `find_mut` found for struct `TodoList` in the current scope
+   --> src/main.rs:167:36
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_mut` not found for this struct
+...
+167 |         let task: &mut Task = list.find_mut(id).unwrap();
+    |                                    ^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `find` found for struct `TodoList` in the current scope
+   --> src/main.rs:170:25
+    |
+ 37 | struct TodoList {
+    | --------------- method `find` not found for this struct
+...
+170 |         assert_eq!(list.find(id).unwrap().tags, ["errand"]);
+    |                         ^^^^ method not found in `TodoList`
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `find`, perhaps you need to implement it:
+            candidate #1: `Iterator`
+
+error[E0599]: no method named `find_by_title` found for struct `TodoList` in the current scope
+   --> src/main.rs:179:22
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_by_title` not found for this struct
+...
+179 |         assert!(list.find_by_title("buy milk").is_some());
+    |                      ^^^^^^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `find_by_title` found for struct `TodoList` in the current scope
+   --> src/main.rs:180:22
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_by_title` not found for this struct
+...
+180 |         assert!(list.find_by_title("buy").is_none());
+    |                      ^^^^^^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `find_mut` found for struct `TodoList` in the current scope
+   --> src/main.rs:189:14
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_mut` not found for this struct
+...
+189 |         list.find_mut(first).unwrap().add_tag("errand");
+    |              ^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `find_mut` found for struct `TodoList` in the current scope
+   --> src/main.rs:190:14
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_mut` not found for this struct
+...
+190 |         list.find_mut(first).unwrap().add_tag("errand");
+    |              ^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `find_mut` found for struct `TodoList` in the current scope
+   --> src/main.rs:191:14
+    |
+ 37 | struct TodoList {
+    | --------------- method `find_mut` not found for this struct
+...
+191 |         list.find_mut(second).unwrap().add_tag("work");
+    |              ^^^^^^^^ method not found in `TodoList`
+
+error[E0599]: no method named `tag_counts` found for struct `TodoList` in the current scope
+   --> src/main.rs:193:27
+    |
+ 37 | struct TodoList {
+    | --------------- method `tag_counts` not found for this struct
+...
+193 |         let counts = list.tag_counts();
+    |                           ^^^^^^^^^^ method not found in `TodoList`
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `todo` (bin "todo" test) due to 10 previous errors
+warning: build failed, waiting for other jobs to finish...
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.70s
+     Running unittests src/main.rs (/target/debug/deps/todo-d7ab9019339f3460)
+
+running 9 tests
+test tests::add_returns_an_id_and_appends ... ok
+test tests::clone_makes_an_independent_copy ... ok
+test tests::done_marks_a_task_by_id ... ok
+test tests::find_by_title_is_exact ... ok
+test tests::find_mut_changes_the_task ... ok
+test tests::find_returns_a_borrow ... ok
+test tests::list_borrows_the_tasks ... ok
+test tests::push_moves_a_task_into_the_list ... ok
+test tests::tags_are_owned_and_counted ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/smoke.rs (/target/debug/deps/smoke-c6d39cd1855ea4dc)
+
+running 1 test
+test banner_prints_on_start ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+$ cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `/target/debug/todo`
+todo — a tiny task manager
+
+Usage:
+  todo              start the interactive list
+  todo add <title>  add a task
+  todo list         list tasks
+
+first: buy milk (done=true)
+found: write the report
+demo: 2 task(s); tags={"errand": 1}
+$ git add -A
+$ git commit -m "day 5: borrow, search, and count tags"
+[main (root-commit) f467f63] day 5: borrow, search, and count tags
+ 6 files changed, 277 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 Cargo.lock
+ create mode 100644 Cargo.toml
+ create mode 100644 rust-toolchain.toml
+ create mode 100644 src/main.rs
+ create mode 100644 tests/smoke.rs
+$ git log --oneline
+f467f63 day 5: borrow, search, and count tags
