@@ -1,0 +1,66 @@
+$ cargo test
+   Compiling todo v0.1.0 (/work)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.84s
+     Running unittests src/lib.rs (/target/debug/deps/todo-1ed536074f28cfaa)
+
+running 23 tests
+test error::tests::display_messages_are_stable ... ok
+test query::tests::count_if_counts_matching_items ... ok
+test store::tests::add_returns_an_id_and_appends ... ok
+test query::tests::find_first_returns_a_borrow ... ok
+test store::tests::blank_title_is_an_error_and_does_not_consume_an_id ... ok
+test store::tests::clone_makes_an_independent_copy ... ok
+test store::tests::done_marks_a_task_by_id ... ok
+test store::tests::find_by_title_is_exact ... ok
+test store::tests::find_mut_changes_the_task ... ok
+test store::tests::find_returns_a_borrow ... ok
+test store::tests::list_borrows_the_tasks ... ok
+test store::tests::list_summary_counts_done ... ok
+test store::tests::push_moves_a_task_into_the_list ... ok
+test store::tests::tags_are_owned_and_counted ... ok
+test task::tests::blank_title_is_rejected ... ok
+test task::tests::done_marks_the_task_done ... ok
+test task::tests::new_task_is_pending ... ok
+test task::tests::task_display_is_one_line ... ok
+test task::tests::task_summary_matches_display ... ok
+test task::tests::title_is_trimmed ... ok
+test task::tests::title_is_owned_by_the_task ... ok
+test view::tests::view_display_matches_the_task_line ... ok
+test view::tests::views_borrow_titles_without_cloning ... ok
+
+test result: ok. 23 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/target/debug/deps/todo-9685c013d1a9c4c9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli.rs (/target/debug/deps/cli-c110823c7cd52607)
+
+running 2 tests
+test demo_shows_views_and_a_list_summary ... ok
+test binary_runs_and_prints_the_banner ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/library.rs (/target/debug/deps/library-6aef6870a26c415a)
+
+running 1 test
+test the_public_api_is_usable_from_outside ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/smoke.rs (/target/debug/deps/smoke-62bbce47558414c8)
+
+running 1 test
+test banner_prints_on_start ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests todo
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
