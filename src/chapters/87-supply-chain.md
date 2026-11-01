@@ -97,12 +97,13 @@ jobs:
 ```
 
 `cargo-deny` checks advisories, licenses, sources, and wildcard bans from
-`deny.toml`. `cargo-audit` checks the RustSec database. The SBOM is uploaded
-with the build, so a release has an inventory.
+`deny.toml`. `cargo-audit` checks the RustSec database. The workflow uploads the
+SBOM as an artifact; attach it to the release when you publish.
 
 ## Secrets
 
-A secret scan is a separate job or a pre-commit hook. It walks the tree and the
+The reference workflow does not include a secret scan yet. Add one as a separate
+job or a pre-commit hook. It walks the tree and the
 history for high-entropy strings and known token formats. A test fixture with a
 fake key is fine; a real key in history is a rotation, not a delete.
 
@@ -138,6 +139,14 @@ separate; the allowlist is how the project states what it accepts.
 The security workflow runs beside the CI check. A failure blocks the merge if the
 branch protection requires it. The SBOM ships with the release; the audit runs
 on a schedule because new advisories arrive for old code.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 87: supply chain"
+```
 
 ## If something went wrong
 

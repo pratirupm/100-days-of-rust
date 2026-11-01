@@ -145,6 +145,14 @@ read path.
 The metrics gain a `websocket_connections` gauge. A connection count that only
 grows is a leak or a client that never closes.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 74: live task updates"
+```
+
 ## If something went wrong
 
 **The upgrade is 401.** The session cookie is missing or expired. The browser

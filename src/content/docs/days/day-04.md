@@ -272,10 +272,11 @@ the function to borrow instead of take ownership.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 4: own the task list"
-[main (root-commit) ...] day 4: own the task list
+[main ...] day 4: own the task list
  6 files changed, 191 insertions(+)
 ...
 $ git log --oneline

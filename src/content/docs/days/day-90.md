@@ -27,20 +27,15 @@ list.
 <!-- transcripts: authored -->
 ```bash
 $ podman pod create --name todo-prod -p 8080:8080
-$ podman run -d --pod todo-prod --name todo-pg \
-    -e POSTGRES_USER=todo -e POSTGRES_PASSWORD=todo \
-    -e POSTGRES_DB=todo -v todo-pg:/var/lib/postgresql/data \
-    docker.io/library/postgres:17
-$ podman run -d --pod todo-prod --name todo-redis \
-    docker.io/library/redis:7
+$ podman volume create todo-data
 $ podman run -d --pod todo-prod --name todo-server \
-    -e TODO_DB=postgres://todo:todo@127.0.0.1:5432/todo \
-    -v todo-data:/data todo-server:0.2
+    -e TODO_DB=sqlite:///data/todo.db \
+    -v todo-data:/data todo-server:0.1
 ```
 
-The server image includes the Postgres adapter; the container uses the same
-environment contract as the systemd unit. The pod shares the network namespace,
-so the database and cache are on localhost.
+The reference image runs the 60-day app on SQLite. The Postgres, Redis, and
+event variants from this track are adapters you add in your own copy; the
+commands below prove the app's own path first.
 
 ## The checks
 
@@ -49,6 +44,10 @@ so the database and cache are on localhost.
 $ curl -fsS http://127.0.0.1:8080/health
 {"status":"ok"}
 $ curl -fsS http://127.0.0.1:8080/metrics | head
+$ curl -s -X POST http://127.0.0.1:8080/api/v1/users \
+    -H 'content-type: application/json' \
+    -d '{"email":"a@example.com","password":"secret"}'
+{"user_id":1}
 $ TOKEN=$(curl -s -X POST http://127.0.0.1:8080/api/v1/sessions \
     -H 'content-type: application/json' \
     -d '{"email":"a@example.com","password":"secret"}' | jq -r .token)
@@ -59,10 +58,15 @@ $ curl -s http://127.0.0.1:8080/api/v1/tasks \
     -H "authorization: Bearer $TOKEN"
 ```
 
-The metrics show the request and task counters. The task is in Postgres. The
-event is in the outbox or the topic; the consumer sees it.
+The metrics show the request and task counters. The task is in the SQLite file
+inside the `todo-data` volume. Register before logging in: a fresh database has
+no user, and the login endpoint correctly returns 401 until one exists.
 
 ## The checklist
+
+The checklist is the **target** state for a deployment with the production
+adapters. An unchecked box is a known gap, not a claim about the reference
+image.
 
 - [ ] The server runs as a non-root user with a read-only root filesystem.
 - [ ] The database is a server with a backup, not a file on the app host.
@@ -98,6 +102,14 @@ practice — measured with `criterion` and tied back to the todo data.
 The app is yours. Add a feature the book did not: recurring tasks, sharing,
 reminders, a mobile client. Keep the tests green; that is how the next change
 stays safe.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 90: the production capstone"
+```
 
 ## If something went wrong
 

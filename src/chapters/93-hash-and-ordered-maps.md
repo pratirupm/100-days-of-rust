@@ -130,8 +130,9 @@ must survive a mutation, use owned keys (`HashMap<String, usize>`) and clone
 the tag. The clone costs one allocation per distinct tag; the borrowed map
 costs none.
 
-For a due-date index, a `BTreeMap<i64, Vec<u32>>` maps a day to the task ids due
-that day. A range query returns the tasks in a window. The vector inside the
+The reference `Task` has no due date yet; adding one is the app extension this
+index serves. A `BTreeMap<i64, Vec<u32>>` maps a day to the task ids due that
+day. A range query returns the tasks in a window. The vector inside the
 value keeps the insertion order for ties; the map keeps the days sorted.
 
 A small example shows the shape:

@@ -112,10 +112,11 @@ again.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 16: property-test title round-trips"
-[main (root-commit) ...] day 16: property-test title round-trips
+[main ...] day 16: property-test title round-trips
  20 files changed, 1096 insertions(+)
 ...
 $ git log --oneline

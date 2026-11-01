@@ -125,6 +125,14 @@ a 429 response. The password hash check is expensive; the limiter protects it.
 The TUI and CLI do not use Redis. They read the store directly or through the
 API; a cache is a server concern.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 67: redis"
+```
+
 ## If something went wrong
 
 **`connection refused`.** Redis is not running or the host is wrong. Inside a

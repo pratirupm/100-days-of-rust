@@ -88,7 +88,8 @@ pub struct Cli {
 }
 ```
 
-`main` installs the subscriber before `run`:
+Declare the module in `main.rs` with `mod logging;`, then install the
+subscriber before `run`:
 
 <!-- verify: src/main.rs at=day-23 -->
 ```rust title="src/main.rs"
@@ -189,10 +190,11 @@ lesson.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 23: log with tracing"
-[main (root-commit) ...] day 23: log with tracing
+[main ...] day 23: log with tracing
  26 files changed, 1917 insertions(+)
 ...
 $ git log --oneline

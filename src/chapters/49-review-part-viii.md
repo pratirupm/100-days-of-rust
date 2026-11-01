@@ -81,7 +81,6 @@ $ git log --oneline
 ... day 46: require CSRF tokens and secure cookies
 ... day 45: validate the browser forms
 ... day 44: render the first web pages
-$ git tag part-viii
 ```
 
 ## If something is red

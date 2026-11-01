@@ -50,6 +50,12 @@ pub async fn save_all(jobs: Vec<(TodoList, PathBuf)>) -> Result<usize, TodoError
     Ok(saved)
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod parallel;
+```
+
 
 `JoinSet::spawn` starts a task and keeps its handle in the set. The task owns
 the list and path (`async move`), so it is `'static` and can outlive the loop
@@ -129,10 +135,11 @@ test parallel::tests::saves_many_lists_in_parallel ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 30: save many lists with JoinSet"
-[main (root-commit) ...] day 30: save many lists with JoinSet
+[main ...] day 30: save many lists with JoinSet
  30 files changed, 2316 insertions(+)
 ...
 $ git log --oneline

@@ -113,10 +113,11 @@ is wrong.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 11: derive custom errors"
-[main (root-commit) ...] day 11: derive custom errors
+[main ...] day 11: derive custom errors
  13 files changed, 623 insertions(+)
 ...
 $ git log --oneline

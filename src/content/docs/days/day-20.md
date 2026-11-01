@@ -85,9 +85,29 @@ version, and about line. `Add { title: String }` makes `title` a required
 positional argument; clap refuses `todo add` with no title before `run` is
 called.
 
+Declare the module in `src/lib.rs` and re-export the command types:
+
+```rust
+pub mod cli;
+pub use cli::{Cli, Command};
+```
+
 ## Dispatch
 
-In `main.rs`, parse and match:
+Move the body of the old `run` into a new function, `fn demo(list: &mut
+TodoList) -> Result<(), TodoError>`. The body does not change; it now receives
+the list instead of creating it.
+
+In `main.rs`, import the parser and the command types, then parse and match:
+
+Add the imports at the top of `src/main.rs`:
+
+```rust
+use clap::Parser;
+use todo::{Cli, Command, Summary, TodoError, TodoList};
+```
+
+Then append `run` and the new `main`:
 
 <!-- verify: src/main.rs at=day-20 -->
 ```rust title="src/main.rs"
@@ -117,6 +137,14 @@ fn run(cli: Cli) -> Result<(), TodoError> {
     }
 
     Ok(())
+}
+
+fn main() {
+    let cli = Cli::parse();
+    if let Err(error) = run(cli) {
+        eprintln!("error: {error}");
+        std::process::exit(1);
+    }
 }
 ```
 
@@ -214,10 +242,11 @@ command. If a command is removed, the test asks why.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 20: give the app a command line"
-[main (root-commit) ...] day 20: give the app a command line
+[main ...] day 20: give the app a command line
  25 files changed, 1584 insertions(+)
 ...
 $ git log --oneline

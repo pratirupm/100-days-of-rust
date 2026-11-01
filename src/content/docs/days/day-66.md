@@ -136,6 +136,14 @@ TUI can choose the database by configuration. The owner-scoped queries use
 The health check runs `SELECT 1` on the pool, not a full table scan. The metrics
 counter for requests stays in the API layer, not the store.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 66: postgreSQL in the app"
+```
+
 ## If something went wrong
 
 **`pool timed out`.** The pool is exhausted or the database is unreachable.

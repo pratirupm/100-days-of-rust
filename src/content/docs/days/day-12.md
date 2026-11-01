@@ -152,10 +152,11 @@ Useful flags:
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 12: test the library and the binary"
-[main (root-commit) ...] day 12: test the library and the binary
+[main ...] day 12: test the library and the binary
  15 files changed, 665 insertions(+)
 ...
 $ git log --oneline

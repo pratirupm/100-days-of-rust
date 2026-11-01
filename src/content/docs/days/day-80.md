@@ -47,20 +47,35 @@ pub enum TaskEvent {
     #[serde(rename = "task.done")]
     Done { task_id: u32, owner_id: i64, email: String },
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Event {
+    pub event_id: String,
+    #[serde(flatten)]
+    pub kind: TaskEvent,
+}
+
+impl Event {
+    pub fn id(&self) -> &str {
+        &self.event_id
+    }
+}
 ```
 
-The enum is a contract. A new variant is an additive change; a renamed variant
-is a breaking one. The `event` field is the discriminator.
+The envelope gives every delivery a unique `event_id`; deduplicate on that, not
+on `task_id` (a task can have both `created` and `done` events). The enum is a
+contract: a new variant is additive only for consumers that tolerate unknown
+variants; otherwise version the event or add a catch-all.
 
 ## The consumer
 
 ```rust
 loop {
     let Some((body, receipt)) = queue.receive().await? else { continue };
-    let event: TaskEvent = serde_json::from_str(&body)?;
-    if !seen(&pool, &event.id()).await? {
-        send(&event).await?;
-        mark_seen(&pool, &event.id()).await?;
+    let event: Event = serde_json::from_str(&body)?;
+    if !seen(&pool, event.id()).await? {
+        send(&event.kind).await?;
+        mark_seen(&pool, event.id()).await?;
     }
     queue.delete(&receipt).await?;
 }
@@ -119,6 +134,14 @@ consumes them. The API's response does not wait for the email.
 
 The service has its own database or schema. It does not read the task table; the
 event carries the email and the title it needs.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 80: the notification service"
+```
 
 ## If something went wrong
 

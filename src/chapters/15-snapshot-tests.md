@@ -119,10 +119,11 @@ ignores them. The reviewed `.snap` is the one that belongs in git.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 15: snapshot the printed lines"
-[main (root-commit) ...] day 15: snapshot the printed lines
+[main ...] day 15: snapshot the printed lines
  19 files changed, 873 insertions(+)
 ...
 $ git log --oneline

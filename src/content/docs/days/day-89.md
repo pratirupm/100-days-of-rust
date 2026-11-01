@@ -95,6 +95,14 @@ habits around it.
 The local Podman lab and the production deployment share the same image and
 environment contract. The difference is the schedule and the owner.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 89: operations"
+```
+
 ## If something went wrong
 
 **The disk fills.** Logs, database growth, or a backup copy. Set retention and

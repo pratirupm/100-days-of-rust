@@ -68,7 +68,6 @@ $ git log --oneline
 ... day 16: property-test title round-trips
 ... day 15: snapshot the printed lines
 ... day 14: table tests and fixtures
-$ git tag part-iii
 ```
 
 ## What you should be able to explain

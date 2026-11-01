@@ -184,10 +184,11 @@ Create a task and scrape again; both counters move.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 56: expose request and task counters"
-[main (root-commit) ...] day 56: expose request and task counters
+[main ...] day 56: expose request and task counters
  50 files changed, 7587 insertions(+)
 ...
 $ git log --oneline

@@ -19,16 +19,25 @@ UI: a layout, a login form, and the task list, all rendered from templates.
 The pages are HTML on the server; there is no client-side framework and no
 JavaScript required. That keeps the first web UI small enough to understand.
 
+:::note
+The `src/web.rs` module grows across Days 44–46. This lesson builds the page
+shell and router; the login, logout, create, and done handlers arrive in the
+next two lessons. The complete file is in the appendix, and the module compiles
+at the end of Day 46.
+:::
+
 ## Add Askama
 
-Askama compiles templates into Rust code. Add it with the other dependencies:
+Askama compiles templates into Rust code. Add it with the cookie extractor:
 
 ```toml
 askama = "0.14"
+axum-extra = { version = "0.12", features = ["cookie"] }
 ```
 
 The version resolves to one compatible with the crate's `rust-version`. The
-templates live in `templates/` by default.
+templates live in `templates/` by default; `axum-extra` provides the typed
+cookie jar the login and CSRF code use.
 
 ## The layout
 
@@ -72,9 +81,11 @@ Create `templates/login.html`:
 {% endblock %}
 ```
 
-The `csrf` value is a placeholder; the handler supplies it. Askama escapes
-`{{ ... }}` by default, so a title cannot inject HTML. That is the main reason
-to use a template engine instead of `format!` strings.
+The `csrf` value is a placeholder; the handler supplies it. It is a random
+token that every write form carries and the server checks on submit. The next
+two lessons show how it is issued and verified. Askama escapes `{{ ... }}` by
+default, so a title cannot inject HTML. That is the main reason to use a
+template engine instead of `format!` strings.
 
 ## The task list
 
@@ -115,7 +126,13 @@ the template free of method calls and database details.
 
 ## The template structs
 
-In `src/web.rs`:
+In `src/web.rs`. First declare the module in `src/lib.rs`:
+
+```rust
+pub mod web;
+```
+
+Then add the template structs:
 
 <!-- verify: src/web.rs at=day-44 -->
 ```rust title="src/web.rs"
@@ -232,10 +249,11 @@ The task list requires a session; the full flow is tested in the module.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 44: render the first web pages"
-[main (root-commit) ...] day 44: render the first web pages
+[main ...] day 44: render the first web pages
  44 files changed, 5864 insertions(+)
 ...
 $ git log --oneline

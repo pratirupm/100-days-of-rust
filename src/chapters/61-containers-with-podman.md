@@ -22,7 +22,7 @@ daemon, no root, no toolbx.
 
 `deploy/Containerfile`:
 
-<!-- verify: deploy/Containerfile at=day-61 -->
+<!-- verify: deploy/Containerfile at=review -->
 ```dockerfile title="deploy/Containerfile"
 # syntax=docker/dockerfile:1
 FROM rust:1.99-bookworm AS builder
@@ -31,7 +31,8 @@ COPY . .
 RUN cargo build --locked --release --bin todo-server
 
 FROM debian:bookworm-slim
-RUN useradd --system --create-home todo
+RUN useradd --system --create-home todo \
+    && install -d -o todo -g todo /data
 COPY --from=builder /src/target/release/todo-server /usr/local/bin/todo-server
 USER todo
 ENV TODO_DB=sqlite:///data/todo.db \
@@ -117,6 +118,14 @@ database migrations run on startup. The metrics endpoint is available at
 The container does not need the web templates or assets at runtime: Askama
 compiles the templates into the binary, and the CSS is embedded. The runtime
 image is the binary plus a minimal Debian userland.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 61: containers with Podman"
+```
 
 ## If something went wrong
 

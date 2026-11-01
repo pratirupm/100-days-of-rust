@@ -29,7 +29,11 @@ default**. That order is the whole configuration lesson.
 clap = { version = "4", features = ["derive", "env"] }
 ```
 
-Then add the field to `Cli`:
+Then import `PathBuf` and add the field to `Cli`:
+
+```rust
+use std::path::PathBuf;
+```
 
 <!-- verify: src/cli.rs at=day-22 -->
 ```rust title="src/cli.rs"
@@ -108,10 +112,11 @@ sees the final `PathBuf`.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 22: resolve the store path from a flag"
-[main (root-commit) ...] day 22: resolve the store path from a flag
+[main ...] day 22: resolve the store path from a flag
  25 files changed, 1721 insertions(+)
 ...
 $ git log --oneline

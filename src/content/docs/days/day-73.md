@@ -122,6 +122,14 @@ The REST API remains the source of truth; the socket carries notifications. A
 client that reconnects fetches the list, then resumes listening. The socket is
 not a database.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 73: webSockets"
+```
+
 ## If something went wrong
 
 **The upgrade returns 400.** The client sent a bad key or the route is missing
@@ -152,7 +160,7 @@ Kafka, or a polling response.
 Design the event first, then the transport. A socket that sends ad-hoc strings
 is a second API with no schema.
 
-The next lesson deploys the app to Kubernetes, where a Service can route
-ordinary HTTP but a WebSocket needs sticky sessions or a shared broadcast.
+The next lesson wires these frames into live task updates. Kubernetes comes
+after that, and a Service there needs sticky sessions or a shared broadcast.
 
 <div class="day-tracker" data-day="73"></div>

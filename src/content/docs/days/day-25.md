@@ -82,7 +82,6 @@ $ git log --oneline
 ... day 22: resolve the store path from a flag
 ... day 21: persist the list as JSON
 ... day 20: give the app a command line
-$ git tag part-iv
 ```
 
 ## What you should be able to explain

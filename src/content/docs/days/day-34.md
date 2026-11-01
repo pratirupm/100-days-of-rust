@@ -111,10 +111,11 @@ test db::tests::add_many_rolls_back_on_a_blank_title ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 34: make batch writes transactional"
-[main (root-commit) ...] day 34: make batch writes transactional
+[main ...] day 34: make batch writes transactional
  33 files changed, 3617 insertions(+)
 ...
 $ git log --oneline
@@ -152,7 +153,7 @@ that is exactly the guarantee we need.
 
 WAL mode (`PRAGMA journal_mode = WAL`) lets readers proceed while one writer
 works. It adds a `-wal` file and a step that folds the log back into the
-database. The next lesson on throughput can turn it on; it is a performance
+database. A later production lesson can turn it on; it is a performance
 choice, not a correctness one.
 
 A transaction is also a unit of retry. If a write fails with `SQLITE_BUSY`,

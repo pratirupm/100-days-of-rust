@@ -76,7 +76,6 @@ $ git log --oneline
 ... day 10: borrow task views
 ... day 9: write generic helpers
 ... day 8: describe tasks with traits
-$ git tag part-ii
 ```
 
 The tag names the end of Part II. You can return to it later with `git switch

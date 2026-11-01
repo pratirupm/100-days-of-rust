@@ -77,7 +77,6 @@ $ git log --oneline
 ... day 52: style the terminal and add help
 ... day 51: guard the terminal event loop
 ... day 50: draw the terminal interface
-$ git tag part-ix
 ```
 
 ## If something is red

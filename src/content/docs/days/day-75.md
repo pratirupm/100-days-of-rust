@@ -26,6 +26,7 @@ Today the app runs on a local cluster.
 
 <!-- transcripts: authored -->
 ```bash
+$ export KIND_EXPERIMENTAL_PROVIDER=podman
 $ kind create cluster --name todo
 $ kubectl cluster-info --context kind-todo
 $ kubectl get nodes
@@ -33,9 +34,10 @@ NAME                  STATUS   ROLES           AGE
 todo-control-plane    Ready    control-plane   ...
 ```
 
-Kind runs the control plane in a container. k3d is the k3s equivalent. Both are
-rootless-friendly with the right Podman/Docker provider; if the provider needs
-privileges, use a disposable VM instead of weakening the host.
+Kind runs the control plane in a container. The environment variable selects
+Podman instead of Docker; on a rootless host, kind may still need extra
+privileges. k3d is the k3s equivalent. If the provider needs privileges, use a
+disposable VM instead of weakening the host.
 
 Load the app image into the cluster:
 
@@ -85,8 +87,7 @@ spec:
             initialDelaySeconds: 2
             periodSeconds: 5
           livenessProbe:
-            httpGet:
-              path: /health
+            tcpSocket:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -197,6 +198,14 @@ The local Podman pod and the Kubernetes Pod share the network idea. The
 Kubernetes Service replaces the pod's published port; the Deployment replaces
 `podman run`.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 75: kubernetes"
+```
+
 ## If something went wrong
 
 **The pod is `ImagePullBackOff`.** The image is not in the cluster. `kind load`
@@ -228,7 +237,7 @@ Stateful workloads need a StatefulSet, stable network identities, and a
 database operator. The app's SQLite file is a teaching compromise; Postgres is
 the production shape.
 
-The next lesson moves the cloud dependency to LocalStack: S3 and SQS without a
-bill.
+The next lesson runs the app's own Deployment in the cluster; after that the
+cloud dependency moves to LocalStack: S3 and SQS without a bill.
 
 <div class="day-tracker" data-day="75"></div>

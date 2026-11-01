@@ -65,7 +65,6 @@ $ git log --oneline
 ... day 28: add async store operations
 ... day 27: share the list behind a lock
 ... day 26: save tasks on a worker thread
-$ git tag part-v
 ```
 
 ## If something is red

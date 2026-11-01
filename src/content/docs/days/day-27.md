@@ -78,6 +78,13 @@ impl SharedList {
     }
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod shared;
+pub use shared::SharedList;
+```
+
 
 Two layers:
 
@@ -158,10 +165,11 @@ test shared::tests::threads_share_one_list ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 27: share the list behind a lock"
-[main (root-commit) ...] day 27: share the list behind a lock
+[main ...] day 27: share the list behind a lock
  28 files changed, 2137 insertions(+)
 ...
 $ git log --oneline

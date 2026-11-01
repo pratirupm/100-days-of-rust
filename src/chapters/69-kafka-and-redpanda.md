@@ -23,7 +23,6 @@ Today the app gets an event stream for task changes.
 <!-- transcripts: authored -->
 ```bash
 $ podman run -d --name todo-redpanda --pod todo-pod \
-    -p 9092:9092 -p 9644:9644 \
     docker.io/redpandadata/redpanda:latest \
     redpanda start --overprovisioned --smp 1 --memory 1G \
     --reserve-memory 0M --node-id 0 --check=false \
@@ -34,7 +33,10 @@ $ podman run -d --name todo-redpanda --pod todo-pod \
 The flags keep the broker small enough for a laptop. `--check=false` skips the
 host tuning check; a container is not a production host.
 
-The broker exposes Kafka on 9092 and its admin API on 9644.
+The broker exposes Kafka on 9092 and its admin API on 9644 **inside the pod**.
+The pod's published ports were fixed at creation; use `podman exec` from the
+host, or recreate the pod with `-p 9092:9092 -p 9644:9644` if the host needs
+direct access.
 
 ## A topic
 
@@ -117,6 +119,14 @@ The events are small:
 The notification service consumes them and sends an email. The search index
 consumes them and updates a document. Neither needs to query the task table on
 the request path.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 69: kafka and Redpanda"
+```
 
 ## If something went wrong
 

@@ -22,16 +22,24 @@ client retries, idempotent writes, and optimistic concurrency.
 ## Client retries
 
 ```rust
-async fn send_with_retry(&self, request: RequestBuilder) -> Result<Response, Error> {
+use std::time::Duration;
+use tokio::time::sleep;
+
+fn jittered_backoff(attempt: u32) -> Duration {
+    let millis = 100u64 * 2u64.pow(attempt.min(5));
+    Duration::from_millis(millis)
+}
+
+async fn send_with_retry(&self, request: RequestBuilder) -> Result<Response, reqwest::Error> {
     let mut attempt = 0;
     loop {
-        let response = request.try_clone().unwrap().send().await;
-        match response {
-            Ok(r) if !r.status().is_server_error() => return Ok(r),
-            Ok(r) if attempt < 3 => { /* retry after backoff */ }
-            Ok(r) => return Ok(r),
-            Err(e) if e.is_timeout() || e.is_connect() => { /* retry */ }
-            Err(e) => return Err(e),
+        let request = request.try_clone().expect("request body is not cloneable");
+        match request.send().await {
+            Ok(response) if !response.status().is_server_error() => return Ok(response),
+            Ok(response) if attempt >= 3 => return Ok(response),
+            Ok(_) => {}
+            Err(error) if error.is_timeout() || error.is_connect() => {}
+            Err(error) => return Err(error),
         }
         attempt += 1;
         sleep(jittered_backoff(attempt)).await;
@@ -40,7 +48,9 @@ async fn send_with_retry(&self, request: RequestBuilder) -> Result<Response, Err
 ```
 
 `try_clone` is required because a request body cannot be replayed after it is
-sent. Retry only idempotent requests, or attach an idempotency key.
+sent; a streamed body is not cloneable, so this helper expects an owned body.
+Retry only idempotent requests, or attach an idempotency key. Add jitter to the
+backoff in production; the fixed doubling is the shape, not the final policy.
 
 ## Idempotency in the API
 
@@ -49,10 +59,11 @@ The table:
 ```sql
 CREATE TABLE idempotency (
     key TEXT PRIMARY KEY,
-    owner_id BIGINT NOT NULL,
+    owner_id INTEGER NOT NULL,
+    request_hash TEXT NOT NULL,
     status INTEGER NOT NULL,
     body TEXT NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 ```
 
@@ -73,7 +84,7 @@ Add a `version` column to tasks. The update carries the version the client read:
 
 ```sql
 UPDATE tasks SET status = 'Done', version = version + 1
-WHERE id = $1 AND owner_id = $2 AND version = $3;
+WHERE id = ? AND owner_id = ? AND version = ?;
 ```
 
 Zero rows affected means the task changed; return 409 and let the client
@@ -104,6 +115,14 @@ small; the design is the hard part.
 
 Do not retry inside the database transaction; retry the whole operation. A
 transaction that timed out may have committed; the retry must be idempotent.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 82: retries and idempotency in the app"
+```
 
 ## If something went wrong
 

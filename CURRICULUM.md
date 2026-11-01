@@ -78,26 +78,26 @@ Ten parts: fifty build days and ten review days, split across the parts.
 ## The next 30 — production ground
 
 Two days per topic: concepts and local setup, then integration into the
-same `todo` app. Labs run in Podman; cloud accounts are optional. Days
-61–90 are `prod-01`…`prod-15` checkpoints.
+same `todo` app. Labs run in Podman; cloud accounts are optional. Commit and
+ tag your own progress as you go.
 
-| Day | Topic | Day 1 | Day 2 | Checkpoint |
-|---:|---|---|---|---|
-| 61–62 | Containers | Podman, images, layers | Containerize `todo-server` | `prod-01` |
-| 63–64 | Compose and local stacks | Compose, networks, volumes | Server + database stack | `prod-02` |
-| 65–66 | CI/CD | GitHub Actions, cache, matrix | Build, test, publish on push | `prod-03` |
-| 67–68 | PostgreSQL | SQL, roles, indexes | Swap the SQLite store | `prod-04` |
-| 69–70 | Redis | Cache, TTL, rate limits | Cache tasks and sessions | `prod-05` |
-| 71–72 | Kafka/Redpanda | Topics, producers, consumers | Publish task events | `prod-06` |
-| 73–74 | gRPC | Protobuf, tonic, status codes | Add a gRPC task service | `prod-07` |
-| 75–76 | WebSockets | Upgrade, frames, backpressure | Live task updates | `prod-08` |
-| 77–78 | Kubernetes | Pods, deployments, services | Deploy to Kind/k3d | `prod-09` |
-| 79–80 | AWS with LocalStack | S3, SQS, IAM-shaped policy | Backups and queues locally | `prod-10` |
-| 81–82 | Microservices | Seams, contracts, failure | Split notifications from tasks | `prod-11` |
-| 83–84 | Distributed systems | Retries, idempotency, ordering | Exactly-once exercise | `prod-12` |
-| 85–86 | Observability at scale | Metrics, traces, dashboards | Instrument the extended app | `prod-13` |
-| 87–88 | Performance and load | Profiling, load tests, budgets | Tune the API and database | `prod-14` |
-| 89–90 | Operations and the capstone | SLOs, on-call, backups | Run the whole stack and check the list | `prod-15` |
+| Day | Topic | Day 1 | Day 2 |
+|---:|---|---|---|
+| 61–62 | Containers | Podman, images, layers | Containerize `todo-server` |
+| 63–64 | CI/CD | GitHub Actions, cache, matrix | Build, test, publish on push |
+| 65–66 | PostgreSQL | SQL, roles, indexes | Design the Postgres store |
+| 67–68 | Redis | Cache, TTL, rate limits | Cache tasks and sessions |
+| 69–70 | Kafka/Redpanda | Topics, producers, consumers | Publish task events |
+| 71–72 | gRPC | Protobuf, tonic, status codes | Design a gRPC task service |
+| 73–74 | WebSockets | Upgrade, frames, backpressure | Live task updates |
+| 75–76 | Kubernetes | Pods, deployments, services | Deploy to Kind/k3d |
+| 77–78 | AWS with LocalStack | S3, SQS, IAM-shaped policy | Backups and queues locally |
+| 79–80 | Microservices | Seams, contracts, failure | Split notifications from tasks |
+| 81–82 | Distributed systems | Retries, idempotency, ordering | Idempotent writes |
+| 83–84 | Observability at scale | Metrics, traces, dashboards | Instrument the extended app |
+| 85–86 | Performance and load | Profiling, load tests, budgets | Measure and tune |
+| 87–88 | Supply chain and incidents | SBOMs, advisories, signatures | Respond and learn |
+| 89–90 | Operations and the capstone | SLOs, on-call, backups | Run the whole stack and check the list |
 
 ## The last 10 — DSA
 

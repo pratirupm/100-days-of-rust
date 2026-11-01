@@ -45,6 +45,13 @@ where
     items.iter().filter(|item| predicate(item)).count()
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod query;
+pub use query::{count_if, find_first};
+```
+
 
 Two type parameters, not one:
 
@@ -156,10 +163,11 @@ first: #1 buy milk [done] (done=true)
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 9: write generic helpers"
-[main (root-commit) ...] day 9: write generic helpers
+[main ...] day 9: write generic helpers
  12 files changed, 486 insertions(+)
 ...
 $ git log --oneline

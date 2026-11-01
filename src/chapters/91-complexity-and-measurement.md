@@ -41,7 +41,9 @@ rust-todo-app/
 The app and the crate share one lockfile and one toolchain. They are separate
 packages because a benchmark should not be compiled into the server.
 
-`dsa/src/lib.rs` declares the modules. Each day adds one:
+The reference `dsa` crate already contains all ten modules; the tags mark
+reading milestones, not ten separate commits. Each day takes one module, reads
+its tests, and asks you to copy the idea into your own crate.
 
 <!-- verify: dsa/src/lib.rs at=day-91 -->
 ```rust title="dsa/src/lib.rs"
@@ -306,8 +308,8 @@ pub fn linear_sum_opaque(n: u64) -> u64 {
 }
 ```
 
-Its measured time is 313 microseconds — about 400 times slower than the folded
-formula, and this is the number that reflects the loop. `halving_steps` is also
+Its measured time is 313 microseconds — about 400,000 times slower than the
+folded formula, and this is the number that reflects the loop. `halving_steps` is also
 optimized into a bit-count operation, so its `623 ps` is the cost of the
 formula, not the loop.
 

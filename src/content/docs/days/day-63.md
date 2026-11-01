@@ -25,7 +25,7 @@ Today the check becomes a workflow.
 
 `.github/workflows/ci.yml`:
 
-<!-- verify: .github/workflows/ci.yml at=day-63 -->
+<!-- verify: .github/workflows/ci.yml at=review -->
 ```yaml title=".github/workflows/ci.yml"
 name: CI
 
@@ -49,6 +49,7 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --locked --workspace --all-targets -- -D warnings
       - run: cargo test --locked --workspace
+      - run: RUSTDOCFLAGS="-D warnings" cargo doc --locked --no-deps
 ```
 
 The workflow has the same three commands as the local check. `--locked` fails if
@@ -96,6 +97,14 @@ they need the private app and captures.
 
 The workflow's job name is part of the configuration; a branch protection
 rule selects it.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 63: cI/CD"
+```
 
 ## If something went wrong
 

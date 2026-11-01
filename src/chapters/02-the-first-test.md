@@ -173,13 +173,14 @@ program, works."
 
 You know the drill:
 
+<!-- transcripts: authored -->
 ```bash
 $ git status
 On branch main
 ...
 $ git add -A
 $ git commit -m "day 2: add the first test"
-[main (root-commit) ...] day 2: add the first test
+[main ...] day 2: add the first test
  6 files changed, 44 insertions(+)
 ...
 $ git log --oneline

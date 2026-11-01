@@ -195,10 +195,11 @@ test client::tests::client_round_trip ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 53: fetch tasks through an API client"
-[main (root-commit) ...] day 53: fetch tasks through an API client
+[main ...] day 53: fetch tasks through an API client
  48 files changed, 7471 insertions(+)
 ...
 $ git log --oneline

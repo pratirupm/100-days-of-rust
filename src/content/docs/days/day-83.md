@@ -106,6 +106,14 @@ The logs already carry request ids from the middleware; the trace id should be
 added to the same context. The web UI's page load and the TUI's refresh are
 separate user journeys; measure them separately.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 83: observability at scale"
+```
+
 ## If something went wrong
 
 **The dashboard is green while users complain.** The metric is measured at the

@@ -138,8 +138,9 @@ linked_push/10_000      time:   [365.67 µs 379.06 µs 393.98 µs]
 vec_growth/100_000      time:   [109.79 µs 113.13 µs 116.75 µs]
 ```
 
-The `Vec` pushed 100,000 values in a third of the time the list took for 10,000.
-Three reasons:
+Normalise the numbers before comparing them: the `Vec` push is about 1.1 ns
+per value, the linked-list push about 38 ns per value. The list is roughly 30
+times slower per push. Three reasons:
 
 - **Allocation per node.** Every push calls the allocator; the vector allocates
   a handful of buffers.
@@ -148,8 +149,9 @@ Three reasons:
 - **Cache locality.** A vector's values sit next to each other; a list's nodes
   are scattered across the heap.
 
-A linked list is `O(1)` per push at the head, and so is a vector. The constant is
-the difference, and the benchmark makes it visible.
+A linked list is `O(1)` per push at the head. A vector push is `O(1)`
+amortized: the occasional reallocation is paid for by the cheap pushes. The
+constant is the difference, and the benchmark makes it visible.
 
 ## When a linked structure wins
 

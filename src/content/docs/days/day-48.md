@@ -170,10 +170,11 @@ test web::tests::index_page_snapshot ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 48: snapshot pages and check accessibility"
-[main (root-commit) ...] day 48: snapshot pages and check accessibility
+[main ...] day 48: snapshot pages and check accessibility
  45 files changed, 6152 insertions(+)
 ...
 $ git log --oneline
@@ -207,9 +208,9 @@ A snapshot compares bytes, not meaning. It cannot tell whether a button is
 reachable by keyboard, whether contrast passes, or whether the form order makes
 sense. Those need a browser and a human.
 
-The next layer is a browser test: Playwright can click, type, and inspect the
-accessibility tree. That is heavier than `oneshot` and worth it for a few
-critical flows, not every page.
+A browser test can click, type, and inspect the accessibility tree; Playwright
+is a common choice. That is heavier than `oneshot` and worth it for a few
+critical flows, not every page. This book does not require one.
 
 For now, the page tests cover rendering, escaping, and the basics. The security
 part revisits headers and cookies; the deployment part checks the real browser

@@ -109,6 +109,14 @@ The app's retry surface:
 Each gets a timeout, a retry policy for transient errors, and an idempotency
 key where the operation is a write.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 81: distributed systems"
+```
+
 ## If something went wrong
 
 **The retry storm takes down the dependency.** No jitter, no budget. Add both,

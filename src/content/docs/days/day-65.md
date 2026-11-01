@@ -36,8 +36,8 @@ $ podman exec todo-pg pg_isready -U todo
 ```
 
 The pod from the previous lesson shares the network namespace. From the server
-container, the database is `127.0.0.1:5432`; from the host, publish a port or
-use `podman exec`.
+container, the database is `127.0.0.1:5432`. From the host, use `podman exec`;
+the pod's published ports were fixed when it was created.
 
 ## The schema
 
@@ -146,6 +146,14 @@ ORDER BY id;
 `sqlx` maps `TIMESTAMPTZ` to `chrono::DateTime<Utc>`; the app's `Task` stores a
 string today. A Postgres adapter would either keep the string at the boundary
 or change `Task` to a typed timestamp. The boundary is the place to decide.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 65: postgreSQL"
+```
 
 ## If something went wrong
 

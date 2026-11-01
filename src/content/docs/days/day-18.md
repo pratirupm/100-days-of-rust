@@ -103,6 +103,11 @@ pub struct Task {
 }
 ```
 
+The rest of the public surface needs the same treatment: `Status` variants,
+every public `TodoList` method, `Summary::summary`, and `TaskView`'s fields and
+`is_done` method. If the warning names an item, add a one-line `///` comment
+that says what it is for.
+
 Build the docs with warnings as errors:
 
 ```bash
@@ -161,10 +166,11 @@ touches code, and the check a future CI job will run.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 18: document and gate the crate"
-[main (root-commit) ...] day 18: document and gate the crate
+[main ...] day 18: document and gate the crate
  24 files changed, 1351 insertions(+)
 ...
 $ git log --oneline

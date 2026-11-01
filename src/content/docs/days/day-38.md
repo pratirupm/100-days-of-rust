@@ -31,8 +31,16 @@ its job."
 axum = "0.8"
 ```
 
-`axum` builds on Tokio, which the app already uses. `tower-http` is already in
-the dependency list for the middleware lesson; it is not used yet.
+`axum` builds on Tokio, which the app already uses. The router test uses
+`tower::ServiceExt::oneshot`, so add it as a dev-dependency:
+
+```toml
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
+```
+
+`tower-http` joins the dependency list in the middleware lesson; it is not
+needed for this health endpoint.
 
 ## The router
 
@@ -79,6 +87,12 @@ async fn health(State(state): State<AppState>) -> Result<Json<Health>, axum::htt
     Ok(Json(Health { status: "ok" }))
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod api;
+```
+
 
 `Router` maps a method and path to a handler. `with_state` attaches the shared
 state; `State<AppState>` extracts it. `AppState` is `Clone` because Axum clones
@@ -179,10 +193,11 @@ lesson.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 38: serve a health endpoint"
-[main (root-commit) ...] day 38: serve a health endpoint
+[main ...] day 38: serve a health endpoint
  37 files changed, 4439 insertions(+)
 ...
 $ git log --oneline

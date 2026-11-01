@@ -13,12 +13,10 @@ bullets:
   - add CSP, frame, and referrer headers.
 ---
 
-The pages link `/assets/app.css`, but there is no static file server. The
-stylesheet is embedded in the binary with `include_str!`, so the deployed
-program carries its own assets.
-
-Today the asset gets the right headers, and the web router gets a small
-security policy.
+The pages link `/assets/app.css`. There is no static directory to deploy: the
+stylesheet is embedded in the binary with `include_str!`, and a tiny route
+serves it. Today that route gets the right headers, and the web router gets a
+small security policy.
 
 ## Embedded assets
 
@@ -79,9 +77,11 @@ Each header closes a small class of bugs:
   a click.
 - `referrer-policy: no-referrer` keeps the app's URLs out of other sites'
   referrer logs.
-- `content-security-policy` allows only same-origin styles, forms, and frames.
-  The app has no inline scripts or styles, so it can start strict. A future
-  inline script needs a nonce or a hash; do not widen the policy by habit.
+- `content-security-policy` allows only same-origin styles and forms;
+  `default-src 'self'` also limits scripts and images, and
+  `frame-ancestors 'none'` forbids framing entirely. The app has no inline
+  scripts or styles, so it can start strict. A future inline script needs a
+  nonce or a hash; do not widen the policy by habit.
 
 The policy is a starting point, not a complete security program. The security
 part adds cookies, throttling, and an audit.
@@ -149,10 +149,11 @@ the developer tools show the headers on the document response.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 47: serve embedded assets with security headers"
-[main (root-commit) ...] day 47: serve embedded assets with security headers
+[main ...] day 47: serve embedded assets with security headers
  44 files changed, 6057 insertions(+)
 ...
 $ git log --oneline

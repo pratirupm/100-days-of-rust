@@ -173,7 +173,8 @@ gives an arbitrary order, not a sorted one.
 
 ## In the app
 
-The priority queue is a good fit for:
+The reference app has no priority queue yet; this is the shape it would use
+for:
 
 - the next-up task in the TUI;
 - a background job scheduler with priorities;

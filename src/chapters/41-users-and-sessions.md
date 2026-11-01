@@ -20,6 +20,88 @@ Today we add registration, login, sessions, and a `CurrentUser` extractor. The
 task routes stay open for one more lesson; the next one makes every task belong
 to a user.
 
+## Add the dependencies
+
+```toml
+argon2 = "0.5"
+rand_core = { version = "0.6", features = ["getrandom"] }
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4", "v7"] }
+```
+
+`argon2` hashes passwords, `sha2` hashes session tokens, `uuid` makes the token,
+and `rand_core` gives Argon2 its OS-backed salt source. The `getrandom` feature
+is what puts `OsRng` in scope.
+
+Declare the module and re-export the user type in `src/lib.rs`:
+
+```rust
+pub mod auth;
+pub use auth::User;
+```
+
+Add the new error variants and the API error cases:
+
+<!-- verify: src/error.rs at=day-41 -->
+```rust title="src/error.rs"
+    /// The email or password did not match.
+    #[error("invalid email or password")]
+    InvalidCredentials,
+    /// The email is already registered.
+    #[error("that email is already registered")]
+    EmailTaken,
+    /// A session token is missing or expired.
+    #[error("unauthorized")]
+    Unauthorized,
+    /// Password hashing failed.
+    #[error("password error: {0}")]
+    Password(String),
+}
+```
+
+The API's error enum gains the matching cases:
+
+<!-- verify: src/api.rs at=HEAD -->
+```rust title="src/api.rs"
+async fn register(
+    State(state): State<AppState>,
+    Json(body): Json<Register>,
+) -> Result<(StatusCode, Json<Me>), ApiError> {
+    let password = body.password.clone();
+    let hash = tokio::task::spawn_blocking(move || auth::hash_password(&password))
+        .await
+        .map_err(|error| TodoError::Password(error.to_string()))??;
+    let id = state.store.create_user(&body.email, &hash).await?;
+    Ok((StatusCode::CREATED, Json(Me { user_id: id })))
+}
+
+async fn login(
+    State(state): State<AppState>,
+    Json(body): Json<Login>,
+) -> Result<Json<Session>, ApiError> {
+    let user = state.store.find_user_by_email(&body.email).await?;
+    let hash = user
+        .as_ref()
+        .map(|user| user.password_hash.clone())
+        .unwrap_or_else(|| auth::dummy_hash().to_string());
+    let password = body.password.clone();
+    let valid = tokio::task::spawn_blocking(move || auth::verify_password(&hash, &password))
+        .await
+        .map_err(|error| TodoError::Password(error.to_string()))?;
+    let user = user
+        .filter(|_| valid)
+        .ok_or_else(|| ApiError::Unauthorized("invalid email or password".to_string()))?;
+
+    let token = auth::new_token();
+    let expires = (Utc::now() + ChronoDuration::days(7)).to_rfc3339_opts(SecondsFormat::Secs, true);
+    state
+        .store
+        .create_session(user.id, &auth::token_hash(&token), &expires)
+        .await?;
+    Ok(Json(Session { token }))
+}
+```
+
 ## The tables
 
 Create `migrations/0004_users_sessions.sql`:
@@ -274,7 +356,10 @@ async fn login(
 ```
 
 An unknown email and a wrong password produce the same 401 message. That is
-deliberate: the response must not reveal which emails are registered.
+deliberate: the response must not reveal which emails are registered. The
+unknown-email path still runs Argon2 against a dummy hash, so its timing is not
+a second oracle. Both the hash and the verify run on a blocking thread;
+Argon2 is deliberately expensive and must not stall a Tokio worker.
 
 The session token is returned once, to the client. The server keeps only its
 hash. A client that loses the token logs in again; the server cannot recover it.
@@ -355,10 +440,11 @@ test api::tests::register_login_and_me ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 41: register users and issue sessions"
-[main (root-commit) ...] day 41: register users and issue sessions
+[main ...] day 41: register users and issue sessions
  39 files changed, 5098 insertions(+)
 ...
 $ git log --oneline

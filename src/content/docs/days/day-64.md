@@ -109,6 +109,14 @@ The workflow does not run the private book checks. Those need the reference
 app and the captured transcripts; the site's workflow runs only the prose lint
 and the build.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 64: cI matrices and releases"
+```
+
 ## If something went wrong
 
 **The release job runs on every push.** The `if:` condition is missing or the

@@ -118,10 +118,11 @@ toggles locally, and the terminal returns to the shell.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 51: guard the terminal event loop"
-[main (root-commit) ...] day 51: guard the terminal event loop
+[main ...] day 51: guard the terminal event loop
  47 files changed, 6757 insertions(+)
 ...
 $ git log --oneline

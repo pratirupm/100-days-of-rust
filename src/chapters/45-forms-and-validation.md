@@ -129,10 +129,11 @@ with the new task. Submit spaces and the request is rejected.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 45: validate the browser forms"
-[main (root-commit) ...] day 45: validate the browser forms
+[main ...] day 45: validate the browser forms
  44 files changed, 5892 insertions(+)
 ...
 $ git log --oneline
@@ -173,6 +174,6 @@ API uses; the handler maps it to 422. Do not duplicate the check in the
 template, the handler, and the database. One rule, one error, two transports
 (JSON and form).
 
-The next lesson adds the CSRF token to every mutating form and explains why a
-cookie alone is not enough.
+The next lesson explains why the token is required on every mutating form and
+hardens the session cookie.
 

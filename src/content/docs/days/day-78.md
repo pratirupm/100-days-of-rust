@@ -112,6 +112,14 @@ and restart.
 The API's request path stays free of cloud calls. A slow S3 upload must not make
 `POST /tasks` slow.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 78: backups and jobs in the cloud"
+```
+
 ## If something went wrong
 
 **The backup is missing.** The timer is not running, or the bucket policy

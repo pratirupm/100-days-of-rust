@@ -95,16 +95,17 @@ not a vulnerability; the warning makes them visible.
 
 Create `scripts/audit.sh`:
 
-<!-- verify: scripts/audit.sh at=day-58 -->
+<!-- verify: scripts/audit.sh at=review -->
 ```bash title="scripts/audit.sh"
 #!/usr/bin/env bash
 # Local security and supply-chain checks. Some tools are optional; the first
-# three commands are the same gate the app uses.
+# four commands are the same check the app uses.
 set -euo pipefail
 
 cargo fmt --all --check
 cargo clippy --locked --workspace --all-targets -- -D warnings
 cargo test --locked --workspace
+RUSTDOCFLAGS="-D warnings" cargo doc --locked --no-deps
 
 echo "dependency duplicates:"
 cargo tree -d
@@ -116,7 +117,7 @@ cargo tree -d
 echo "audit: local checks passed"
 ```
 
-The first three commands are the app's check; the rest are the supply-chain
+The first four commands are the app's check; the rest are the supply-chain
 lens. `cargo tree -d` needs no extra tool. The optional commands belong in a
 tool image, not on the host.
 
@@ -176,10 +177,11 @@ when it is reproducible.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 58: add the security audit policy"
-[main (root-commit) ...] day 58: add the security audit policy
+[main ...] day 58: add the security audit policy
  54 files changed, 7718 insertions(+)
 ...
 $ git log --oneline

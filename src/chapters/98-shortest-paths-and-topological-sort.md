@@ -159,6 +159,10 @@ A negative duration would make the problem ill-posed; a cycle would make it
 infinite. The topological sort rejects the cycle first, which is why the two
 algorithms belong in the same lesson.
 
+The crate implements the topological sort and Dijkstra; the critical-path pass
+is left as an exercise. Add it to `paths.rs` with a DAG test before using it in
+a schedule.
+
 ## The test
 
 <!-- verify: dsa/src/paths.rs at=day-98 -->

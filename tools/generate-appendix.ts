@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 /**
- * Generate the finished-app appendix from the reference application.
+ * Generate the finished-app appendix from the reference application at the
+ * end of the 60-day app track (`day-60` by default; override with APP_REF).
  *
  * One page per directory group (plus an index) so no single page carries the
  * whole tree. Every tracked, hand-written file is included; build artifacts,
@@ -15,6 +16,7 @@ import { basename, extname, join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const APP = join(ROOT, '..', 'rust-todo-app');
+const REF = process.env.APP_REF ?? 'day-60';
 const OUT_DIR = join(ROOT, 'src/content/docs/appendices/the-finished-app');
 const INDEX = join(ROOT, 'src/content/docs/appendices/the-finished-app.md');
 
@@ -73,15 +75,16 @@ function groupFor(path: string): { slug: string; label: string } {
 	return { slug: dir.replace(/^\./, ''), label: dir };
 }
 
-const INTRO = `> **Spoilers.** The finished application, file by file — the state the course
-> builds toward, and the tree every quote and transcript in this book was
-> captured from. Use it to compare and to unstick; don't copy files
-> wholesale. \`Cargo.lock\` is what \`cargo build\` generates, and
+const INTRO = `> **Spoilers.** The finished 60-day application, file by file — the state the
+> first track builds toward. Use it to compare and to unstick; don't copy
+> files wholesale. \`Cargo.lock\` is what \`cargo build\` generates, and
 > \`target/\`, local databases, and session files are not reproduced here.
-> Each section is the file's source, exactly as it lives in the project.
+> Each section is the file's source at the \`day-60\` tag.
 `;
 
-const tracked = execFileSync('git', ['-C', APP, 'ls-files'], { encoding: 'utf8' })
+const tracked = execFileSync('git', ['-C', APP, 'ls-tree', '-r', '--name-only', REF], {
+	encoding: 'utf8',
+})
 	.trim()
 	.split('\n');
 let files = tracked.filter((f) => f && !excluded(f)).sort();
@@ -104,7 +107,7 @@ await rm(OUT_DIR, { recursive: true, force: true });
 await mkdir(OUT_DIR, { recursive: true });
 
 const indexParts: string[] = [
-	`---\ntitle: The finished app (spoilers)\ndescription: The finished application, file by file — the state every chapter builds toward, with spoilers.\nsidebar:\n  order: 1\ntableOfContents: false\npagefind: false\n---\n\n`,
+	`---\ntitle: The finished app (spoilers)\ndescription: The finished 60-day application, file by file, with spoilers.\nsidebar:\n  order: 1\ntableOfContents: false\npagefind: false\n---\n\n`,
 	INTRO,
 	`\n## The files, by directory\n\n`,
 ];
@@ -120,7 +123,10 @@ for (const slug of order) {
 		`Part of [The finished app (spoilers)](${BASE}/appendices/the-finished-app/).\n`,
 	];
 	for (const file of group.files) {
-		const content = (await readFile(join(APP, file), 'utf8')).replace(/\n+$/, '');
+		const content = execFileSync('git', ['-C', APP, 'show', `${REF}:${file}`], {
+			encoding: 'utf8',
+			maxBuffer: 10 * 1024 * 1024,
+		}).replace(/\n+$/, '');
 		parts.push(`\n## \`${file}\`\n\n\`\`\`\`${langFor(file)}\n${content}\n\`\`\`\`\n`);
 	}
 	await writeFile(join(OUT_DIR, `${slug}.md`), parts.join('\n'));

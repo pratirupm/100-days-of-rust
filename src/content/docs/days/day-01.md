@@ -162,13 +162,15 @@ Two more files appeared:
 
 Open `.gitignore` and add the lines the app will need later:
 
-<!-- verify: .gitignore at=day-01 -->
+<!-- verify: .gitignore at=HEAD -->
 ```text title=".gitignore"
 /target
 /todo.db
 /todo.db-shm
 /todo.db-wal
 /todo.db.session
+/todo.json
+/todo.json.tmp
 /.env
 *.snap.new
 ```

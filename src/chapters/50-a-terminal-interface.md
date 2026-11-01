@@ -20,6 +20,15 @@ Ratatui is an **immediate-mode** library: every frame redraws the whole screen
 from the current state. There is no retained widget tree to keep in sync; the
 `App` holds the data and the selection, and `draw` renders it.
 
+## Add Ratatui
+
+`ratatui` draws the screen; its `crossterm` backend is re-exported, so the TUI
+does not need a separate crossterm dependency:
+
+```toml
+ratatui = "0.29.0"
+```
+
 ## The state
 
 Create `src/tui.rs`:
@@ -50,9 +59,19 @@ impl App {
         }
     }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod tui;
+```
+
 
 The state is small on purpose. The TUI does not own a store or a session; it is
 a view of a list. A later lesson adds the client that refreshes that list.
+
+The binary has two sources: with `TODO_API` and `TODO_TOKEN`, it reads the API
+for the token's owner; without them, it reads the local database. The local
+path is a single-user convenience, not the owner-scoped API path.
 
 ## Draw a frame
 
@@ -248,10 +267,11 @@ The screen shows the header, the list, and the status bar. `q` exits.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 50: draw the terminal interface"
-[main (root-commit) ...] day 50: draw the terminal interface
+[main ...] day 50: draw the terminal interface
  47 files changed, 6731 insertions(+)
 ...
 $ git log --oneline

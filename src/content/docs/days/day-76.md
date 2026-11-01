@@ -47,11 +47,11 @@ metadata:
   name: todo-secret
 type: Opaque
 stringData:
-  TODO_DB: "postgres://todo:${DB_PASSWORD}@postgres:5432/todo"
+  TODO_DB: "postgres://todo:CHANGE_ME@postgres:5432/todo"
 ```
 
-Do not commit a real password. Create the Secret from a file or a secret
-manager:
+Kubernetes does not expand shell variables in `stringData`; replace
+`CHANGE_ME` or create the Secret from a file. Do not commit a real password:
 
 <!-- transcripts: authored -->
 ```bash
@@ -80,13 +80,19 @@ spec:
       restartPolicy: Never
       containers:
         - name: migrate
-          image: todo-server:0.2
+          image: todo-server:0.1
           command: ["/usr/local/bin/todo-server"]
           args: ["--migrate-only"]
+          envFrom:
+            - configMapRef:
+                name: todo-config
+            - secretRef:
+                name: todo-secret
 ```
 
-The server needs a `--migrate-only` mode that applies the schema and exits.
-The Deployment then starts with migrations already done.
+Add the `--migrate-only` mode first: it applies the schema and exits. The
+reference server does not have that mode yet. The Deployment then starts with
+migrations already done.
 
 ## Probes
 
@@ -138,6 +144,14 @@ orchestrator: probes, a Service, a volume claim, and a rollout.
 The metrics endpoint is a scrape target; the ServiceMonitor or a Prometheus
 annotation wires it. The logs go to stdout/stderr; the cluster's log collector
 reads them.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 76: the app on Kubernetes"
+```
 
 ## If something went wrong
 

@@ -116,10 +116,11 @@ default.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 14: table tests and fixtures"
-[main (root-commit) ...] day 14: table tests and fixtures
+[main ...] day 14: table tests and fixtures
  16 files changed, 706 insertions(+)
 ...
 $ git log --oneline

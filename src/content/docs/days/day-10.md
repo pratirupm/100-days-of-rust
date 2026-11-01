@@ -64,6 +64,13 @@ impl fmt::Display for TaskView<'_> {
     }
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod view;
+pub use view::TaskView;
+```
+
 
 Read the type first: `TaskView<'a>` has a field `title: &'a str`. The `'a`
 says the title points at text that lives at least as long as the view. The
@@ -189,10 +196,11 @@ test result: ok. 22 passed; 0 failed; ...
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 10: borrow task views"
-[main (root-commit) ...] day 10: borrow task views
+[main ...] day 10: borrow task views
  13 files changed, 562 insertions(+)
 ...
 $ git log --oneline

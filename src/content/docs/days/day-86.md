@@ -42,11 +42,14 @@ SELECT ... FROM tasks WHERE owner_id = $1 ORDER BY id;
 ```
 
 The plan scans the table and sorts. With 10,000 tasks for one user, the sort is
-the cost. The index `(owner_id, id)` matches the filter and the order:
+the cost. The SQLite index `(owner_id, id)` matches the filter and the order:
 
 ```sql
 CREATE INDEX tasks_owner_id_idx ON tasks (owner_id, id);
 ```
+
+The Postgres adapter uses the same column order; `EXPLAIN (ANALYZE, BUFFERS)`
+shows the equivalent plan there.
 
 The plan becomes an index scan; the sort disappears. Measure again:
 
@@ -67,8 +70,9 @@ response; the API should paginate:
 ... WHERE owner_id = $1 ORDER BY id LIMIT $2 OFFSET $3;
 ```
 
-The web UI reads a page, the TUI reads a page, and the response size drops. The
-page size is a product decision; 50 is a reasonable start. Cursor pagination
+The web UI and the TUI can read a page once the endpoint supports it, and the
+response size drops. The page size is a product decision; 50 is a reasonable
+start. Cursor pagination
 (`WHERE id > $last`) avoids the offset cost on deep pages.
 
 ## The third candidate
@@ -109,6 +113,14 @@ compiler flags are guesses until measured.
 
 The web page renders the same list; pagination helps it too. The TUI loads the
 local database; its list is small enough, but the same query shape applies.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 86: the optimization pass"
+```
 
 ## If something went wrong
 

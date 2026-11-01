@@ -264,10 +264,11 @@ that needs sorted output must sort the keys.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 5: borrow, search, and count tags"
-[main (root-commit) ...] day 5: borrow, search, and count tags
+[main ...] day 5: borrow, search, and count tags
  6 files changed, 277 insertions(+)
 ...
 $ git log --oneline

@@ -159,10 +159,11 @@ test api::tests::create_returns_201_and_the_task ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 42: scope every task to its owner"
-[main (root-commit) ...] day 42: scope every task to its owner
+[main ...] day 42: scope every task to its owner
  39 files changed, 5258 insertions(+)
 ...
 $ git log --oneline

@@ -165,10 +165,11 @@ It *does* break if `title` disappears or `status` changes from `Pending` to
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 24: print human and JSON output"
-[main (root-commit) ...] day 24: print human and JSON output
+[main ...] day 24: print human and JSON output
  26 files changed, 1968 insertions(+)
 ...
 $ git log --oneline

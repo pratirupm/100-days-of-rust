@@ -47,7 +47,7 @@ window. A consumer that ignores unknown fields survives additive changes.
 
 ## The failure modes
 
-- **Queue unavailable** — the producer retries; the event stays in the outbox.
+- **Queue unavailable** — with an outbox, the event waits in the database; a best-effort producer retries and can lose it.
 - **Consumer down** — messages wait; the queue depth grows; an alert fires.
 - **Email provider down** — retry with backoff; dead-letter after the budget.
 - **Duplicate delivery** — idempotency key; one email per event id.
@@ -85,6 +85,14 @@ import the notification code.
 
 The `Store` trait stays in the monolith. The notification service has its own
 small store for idempotency (`notifications` table or Redis key).
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 79: microservices"
+```
 
 ## If something went wrong
 

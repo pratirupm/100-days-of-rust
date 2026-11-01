@@ -97,9 +97,10 @@ and tags when they become useful. It never assumes you already know git.
 - Read the compiler's message slowly. Rust's errors name the file, the line,
   and the rule. The book has a **The compiler says** box in the hard lessons
   that translates the real message into plain words.
-- As a last resort, the finished app appears in full in the appendix at the
-  end of the course — but give it an honest try first. Struggling a little is
-  how the learning happens.
+- As a last resort, the finished 60-day app appears in full in
+  [The finished app (spoilers)](/100-days-of-rust/appendices/the-finished-app/)
+  — but give it an honest try first. Struggling a little is how the learning
+  happens.
 
 ## How the book was checked
 

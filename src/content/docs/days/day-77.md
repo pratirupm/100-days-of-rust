@@ -26,12 +26,13 @@ the endpoint changes.
 
 <!-- transcripts: authored -->
 ```bash
-$ podman run -d --name todo-localstack --pod todo-pod \
-    -p 4566:4566 -e SERVICES=s3,sqs \
-    docker.io/localstack/localstack:stable
+$ podman run -d --name todo-localstack -p 4566:4566 \
+    -e SERVICES=s3,sqs docker.io/localstack/localstack:stable
+$ until curl -fsS http://127.0.0.1:4566/_localstack/health >/dev/null; do sleep 1; done
 $ curl -s http://127.0.0.1:4566/_localstack/health | jq
 ```
 
+The container publishes its own port; it does not need to join the todo pod.
 The health endpoint lists the enabled services. Keep the surface small:
 enabling every service makes startup slow and memory hungry.
 
@@ -128,6 +129,14 @@ producer is not.
 
 Set a budget alarm before the first real deploy. The free tier is not a safety
 net.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 77: aWS with LocalStack"
+```
 
 ## If something went wrong
 

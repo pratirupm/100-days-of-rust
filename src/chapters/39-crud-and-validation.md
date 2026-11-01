@@ -58,7 +58,7 @@ struct CreateTask {
 
 The JSON `{ "title": "buy milk" }` maps to this struct. A missing `title` is a
 deserialization error, which Axum turns into a 422 by default. A present but
-blank title reaches `TodoList::add`, which returns `TodoError::EmptyTitle`.
+blank title reaches the store, which returns `TodoError::EmptyTitle`.
 
 ## The handlers
 
@@ -124,18 +124,24 @@ Axum before the handler runs.
 
 ## One error shape
 
-<!-- verify: src/api.rs at=day-39 -->
+<!-- verify: src/api.rs at=HEAD -->
 ```rust title="src/api.rs"
 enum ApiError {
-    BadRequest(String),
+    Validation(String),
+    Unauthorized(String),
     NotFound(String),
+    Conflict(String),
     Internal(String),
 }
 
 impl From<TodoError> for ApiError {
     fn from(error: TodoError) -> Self {
         match error {
-            TodoError::EmptyTitle => Self::BadRequest(error.to_string()),
+            TodoError::EmptyTitle => Self::Validation(error.to_string()),
+            TodoError::InvalidCredentials | TodoError::Unauthorized => {
+                Self::Unauthorized(error.to_string())
+            }
+            TodoError::EmailTaken => Self::Conflict(error.to_string()),
             TodoError::NotFound(id) => Self::NotFound(format!("no task with id {id}")),
             other => Self::Internal(other.to_string()),
         }
@@ -145,9 +151,18 @@ impl From<TodoError> for ApiError {
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
         let (status, title, detail) = match self {
-            Self::BadRequest(detail) => (StatusCode::UNPROCESSABLE_ENTITY, "Invalid task", detail),
+            Self::Validation(detail) => (StatusCode::UNPROCESSABLE_ENTITY, "Invalid task", detail),
+            Self::Unauthorized(detail) => (StatusCode::UNAUTHORIZED, "Unauthorized", detail),
             Self::NotFound(detail) => (StatusCode::NOT_FOUND, "Task not found", detail),
-            Self::Internal(detail) => (StatusCode::INTERNAL_SERVER_ERROR, "Internal error", detail),
+            Self::Conflict(detail) => (StatusCode::CONFLICT, "Conflict", detail),
+            Self::Internal(detail) => {
+                tracing::error!(%detail, "internal API error");
+                (
+                    StatusCode::INTERNAL_SERVER_ERROR,
+                    "Internal error",
+                    "the server could not complete the request".to_string(),
+                )
+            }
         };
         let body = Json(json!({
             "type": "about:blank",
@@ -170,6 +185,8 @@ status, and detail. Every failure looks the same, so a client needs one parser.
 
 `From<TodoError>` maps the store's errors: a blank title is 422, a missing task
 is 404, and everything else is 500. `?` in a handler triggers the conversion.
+The internal branch logs the detail and returns a fixed message; database
+errors and paths must not cross the API boundary.
 
 The content type is `application/problem+json`, not `application/json`. The
 test checks it.
@@ -258,10 +275,11 @@ $ curl -s -X POST http://127.0.0.1:8080/api/v1/tasks \
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 39: build task CRUD endpoints"
-[main (root-commit) ...] day 39: build task CRUD endpoints
+[main ...] day 39: build task CRUD endpoints
  37 files changed, 4622 insertions(+)
 ...
 $ git log --oneline

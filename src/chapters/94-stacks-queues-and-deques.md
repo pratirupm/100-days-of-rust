@@ -76,7 +76,8 @@ stack is not empty at the end.
 
 ## A stack in the app
 
-Undo is a stack of changes:
+The reference TUI does not have undo yet; this is the shape to add. Undo is a
+stack of changes:
 
 <!-- transcripts: authored -->
 ```text
@@ -192,8 +193,9 @@ and it quietly turns an `O(1)` loop into `O(n²)`.
 
 ## Queues in the app
 
-The next-up list is a queue: new tasks are appended, and the oldest unfinished
-task is shown first. The TUI could keep the queue in memory; the API can return
+A next-up list is a queue: new tasks are appended, and the oldest unfinished
+task is shown first. The reference TUI shows the whole list; the queue is an
+extension. The TUI could keep the queue in memory; the API can return
 a page ordered by id.
 
 A job queue is the same shape at a larger scale. The server accepts a job,

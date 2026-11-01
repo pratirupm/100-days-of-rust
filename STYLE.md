@@ -61,7 +61,10 @@ practices it every day.
    only place background theory lives.
 6. **A one-line closing** that points at what's next — never "chapter N".
 
-Target length: **1,200–4,000 words** per chapter.
+Target length: **650–4,000 words** per chapter. Most build days land around
+700–1,200 words; review days usually run 500–900. A few deep lessons run longer.
+The number is a sanity check, not a quota: a short chapter is fine if it still
+teaches the day's change and its tests.
 
 ## Hard rules (enforced by `bun run lint`)
 

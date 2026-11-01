@@ -15,6 +15,14 @@ Each topic gets two days: one for the concepts and the local setup, one for
 wiring it into the app. The days are numbered 61–90, but they can be taken
 in any order once the app is complete.
 
+**How to read this track.** The reference app is the 60-day SQLite
+application. Its container, CI, deployment, and supply-chain files exist in the
+project. The service integrations — a Postgres store, Redis cache, Kafka
+outbox, gRPC service, WebSocket route, Kubernetes manifests, notification
+service, retry layer, and metrics exporter — are designs you implement in your
+own copy. The code shows the shape and the failure modes; it is not compiled
+into the reference app's check. Commands that depend on those additions say so.
+
 ## The topics
 
 - **Containers** — Podman, images, layers, and a container for `todo-server`.
@@ -61,5 +69,8 @@ in any order once the app is complete.
 
 - The finished app from Day 60.
 - Podman. Everything runs rootless on your machine.
+- Optional for specific labs: the AWS CLI and `jq` for LocalStack, `kubectl`
+  and Kind or k3d for Kubernetes, and `oha`/`perf` for the load lessons. Each
+  lab names the tool it needs.
 - Optional: a GitHub account for the CI/CD days, and a cloud account only if
   you want to repeat the LocalStack exercises for real.

@@ -89,7 +89,7 @@ was this?" problem; convert for display, never for storage.
 
 The id stays as the database key for now. The UUID is the **external**
 identifier: it can travel between databases and clients without a collision.
-The next lessons use it in exports and URLs.
+The import/export lesson uses it as the stable identity across databases.
 
 ## The migration
 
@@ -167,10 +167,11 @@ test db::tests::tasks_have_uuid_and_created_at ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 35: add UUIDs and UTC timestamps"
-[main (root-commit) ...] day 35: add UUIDs and UTC timestamps
+[main ...] day 35: add UUIDs and UTC timestamps
  34 files changed, 3848 insertions(+)
 ...
 $ git log --oneline

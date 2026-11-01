@@ -117,10 +117,11 @@ CREATE INDEX tasks_status_idx ON tasks (status);
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 33: run versioned migrations"
-[main (root-commit) ...] day 33: run versioned migrations
+[main ...] day 33: run versioned migrations
  33 files changed, 3574 insertions(+)
 ...
 $ git log --oneline

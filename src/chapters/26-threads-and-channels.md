@@ -85,6 +85,13 @@ impl Drop for SaveWorker {
     }
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod worker;
+pub use worker::SaveWorker;
+```
+
 
 The pieces:
 
@@ -152,10 +159,11 @@ test worker::tests::saves_in_the_background ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 26: save tasks on a worker thread"
-[main (root-commit) ...] day 26: save tasks on a worker thread
+[main ...] day 26: save tasks on a worker thread
  27 files changed, 2050 insertions(+)
 ...
 $ git log --oneline

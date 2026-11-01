@@ -82,9 +82,10 @@ A profile says where the time goes:
 
 <!-- transcripts: authored -->
 ```bash
-$ perf record -g -- ./target/release/todo-server
+$ pgrep todo-server
+$ perf record -g -p <pid> -- sleep 30
 $ perf report
-$ cargo flamegraph --bin todo-server
+$ cargo flamegraph --pid <pid> --output flame.svg
 ```
 
 `perf` samples the CPU; a flame graph shows the stack. For async code, also
@@ -99,15 +100,15 @@ follows the question.
 The query plan is the first place to look for an API:
 
 ```sql
-EXPLAIN (ANALYZE, BUFFERS)
+EXPLAIN QUERY PLAN
 SELECT id, uuid, created_at, title, status, tags
-FROM tasks WHERE owner_id = $1 ORDER BY id;
+FROM tasks WHERE owner_id = ? ORDER BY id;
 ```
 
-A sequential scan on a large table is the usual finding. The composite index
-from the Postgres lesson (`owner_id, status`) or `(owner_id, id)` is the fix.
-Measure the plan before and after; an index that is not used is a write cost
-with no read benefit.
+A full table scan on a large table is the usual finding. The reference app is
+SQLite; the composite index that matches its list query is `(owner_id, id)`.
+The Postgres lesson uses its own SQL and planner. Measure the plan before and
+after; an index that is not used is a write cost with no read benefit.
 
 N+1 queries are the second finding: one query for the list, one per task for
 tags. Join or batch.
@@ -122,8 +123,16 @@ The app's hot paths:
 - the TUI — local render, not a server path.
 
 The metrics endpoint, the health probe, and the login limiter are also request
-paths. A limiter that calls Redis on every login is a dependency in the hot
-path; measure it.
+paths. If you add the Redis limiter from the production track, its round trip is in
+the login hot path; measure it.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 85: performance and load"
+```
 
 ## If something went wrong
 

@@ -1,7 +1,10 @@
 # Validation
 
-Every command and transcript in this book is checked against a real
-application, built and tested in Podman. The host never needs Rust.
+The application lessons and the DSA crate are checked against the reference
+application and captured runs, built and tested in Podman. The production labs
+are local Podman exercises; the ones that were run are listed under
+[Production lab checks](#production-lab-checks). The host never needs Rust for
+the application or DSA checks.
 
 ## The containers
 
@@ -48,6 +51,10 @@ smoke test, database migration, and so on).
 
 ## Latest run
 
+- **2026-11-01** — review pass. `tools/validate-app.sh HEAD` passes the full
+  workspace gate after the API-error, auth, web-error, and deployment fixes.
+  The site builds 121 pages, including the finished-app appendix. Quote checks:
+  259; transcript lines: 492.
 - **2026-10-31** — `day-100`, Rust 1.99.0, Podman image `rust-todo-validator:1.99`.
   `cargo fmt`, `clippy`, the full workspace test suite (app and `dsa`), and
   `cargo doc` pass. The DSA tests and criterion benchmarks are captured in
@@ -80,9 +87,9 @@ smoke test, database migration, and so on).
   users returned the inserted row.
 - **2026-10-31** — Redis 7 (Podman, `redis:7-alpine`). `SET ... EX`, `TTL`,
   `GET`, `INCR`, and `EXPIRE` returned the values shown in Day 67.
-- **2026-10-31** — LocalStack 4.13 (Podman). The Day 77 S3 bucket, upload,
-  listing, SQS queue, send, and receive commands succeeded against the local
-  endpoint.
+- **2026-10-31** — LocalStack 4.13 (Podman, standalone on a free host port).
+  The Day 77 S3 bucket, upload, listing, SQS queue, send, and receive commands
+  succeeded against the local endpoint.
 
 Kafka/Redpanda, gRPC, WebSockets, and Kubernetes are written as optional local
 labs; their manifests and commands are not re-run by the book's default check.

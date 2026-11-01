@@ -208,10 +208,11 @@ test result: ok. 18 passed; 0 failed; ...
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 8: describe tasks with traits"
-[main (root-commit) ...] day 8: describe tasks with traits
+[main ...] day 8: describe tasks with traits
  11 files changed, 451 insertions(+)
 ...
 $ git log --oneline

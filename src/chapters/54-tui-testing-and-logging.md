@@ -107,10 +107,11 @@ changes.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 54: snapshot the TUI and log startup"
-[main (root-commit) ...] day 54: snapshot the TUI and log startup
+[main ...] day 54: snapshot the TUI and log startup
  49 files changed, 7492 insertions(+)
 ...
 $ git log --oneline

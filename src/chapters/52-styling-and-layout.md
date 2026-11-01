@@ -138,10 +138,11 @@ the terminal; the overlay follows the new center.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 52: style the terminal and add help"
-[main (root-commit) ...] day 52: style the terminal and add help
+[main ...] day 52: style the terminal and add help
  47 files changed, 6802 insertions(+)
 ...
 $ git log --oneline

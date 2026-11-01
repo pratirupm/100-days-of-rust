@@ -12,8 +12,10 @@ bullets:
   - fall back to Postgres when Redis is down.
 ---
 
-Redis is running. This lesson wires it into the app at two points where it
-earns its place: the task list read and the login limiter.
+Redis is running. This lesson designs the two places where it earns its place:
+the task list read and the login limiter. The reference app has no Redis
+dependency yet; add the `Cache` trait and the client in your copy before using
+the snippets.
 
 The rule is the same in both: Redis is allowed to fail, and the app still
 works.
@@ -128,6 +130,14 @@ The API's task read is the first cache. The web UI's page render uses the same
 API? It calls the store directly today; move it to the same cache layer or let
 it read the database. A cache is not free consistency; one client with a
 short TTL is easier to reason about than two.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 68: redis in the app"
+```
 
 ## If something went wrong
 

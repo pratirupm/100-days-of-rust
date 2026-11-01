@@ -186,6 +186,34 @@ pub use task::{Status, Task};
 the library. `pub use` re-exports an item at the library root, so callers can
 write `todo::TodoList` instead of `todo::store::TodoList`.
 
+## Make the boundary public
+
+A module boundary is a visibility boundary. `store.rs` and `main.rs` use
+`Task`, its fields, and its methods, so every one of those items must be marked
+`pub`. Make these changes while moving the code:
+
+- `pub struct Task`, with `pub` on `id`, `title`, `status`, and `tags`;
+- `pub enum Status`;
+- `pub fn new`, `pub fn done`, `pub fn is_done`, and `pub fn add_tag` on `Task`;
+- `pub struct TodoList` (its fields can stay private);
+- `pub fn new`, `add`, `push`, `list`, `find`, `find_mut`, `find_by_title`,
+  `done`, and `tag_counts` on `TodoList`.
+
+The previous days' tests call `Task::new` and `list.add` without handling a
+`Result`. Change those calls to `.unwrap()` where the title is known to be
+good, or to `?` in a function that returns `Result`.
+
+Clippy's `new_without_default` lint also expects a `Default` implementation for
+a public `TodoList::new`. Add it before the tests:
+
+```rust
+impl Default for TodoList {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+```
+
 The files look like this:
 
 <!-- transcripts: authored -->
@@ -289,10 +317,11 @@ tests now run against the library. The smoke test still runs the binary.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 6: return errors and split the crate"
-[main (root-commit) ...] day 6: return errors and split the crate
+[main ...] day 6: return errors and split the crate
  10 files changed, 387 insertions(+)
 ...
 $ git log --oneline

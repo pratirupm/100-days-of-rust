@@ -24,7 +24,7 @@ installs as an offline app.
 | `CURRICULUM.md` | The full 100-day plan: day, lesson, app change, tests, tag |
 | `src/chapters/` | The lesson sources — edit these, then `bun run days` |
 | `src/content/docs/` | The site pages, including the generated day pages |
-| `src/content/docs/appendices/` | The finished app, file by file; and where to go next |
+| `src/content/docs/appendices/` | The finished 60-day app, file by file; and where to go next |
 | `tools/` | Generators and gates — prose lint, quote and transcript checks, icons |
 | `containers/validator/` | The pinned Podman image used to build and test the app |
 | `STYLE.md` | The house style every lesson follows |

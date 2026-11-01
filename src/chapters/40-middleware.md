@@ -127,10 +127,11 @@ x-frame-options: DENY
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 40: wrap the API in middleware"
-[main (root-commit) ...] day 40: wrap the API in middleware
+[main ...] day 40: wrap the API in middleware
  37 files changed, 4672 insertions(+)
 ...
 $ git log --oneline

@@ -23,7 +23,7 @@ Today those become files in `deploy/`.
 
 ## The unit
 
-<!-- verify: deploy/todo.service at=day-59 -->
+<!-- verify: deploy/todo.service at=review -->
 ```ini title="deploy/todo.service"
 [Unit]
 Description=todo server — 100 Days of Rust
@@ -36,6 +36,8 @@ User=todo
 Group=todo
 WorkingDirectory=/var/lib/todo
 StateDirectory=todo
+StateDirectoryMode=0700
+UMask=0077
 EnvironmentFile=/etc/todo/todo.env
 ExecStart=/usr/local/bin/todo-server
 Restart=on-failure
@@ -75,10 +77,11 @@ public edge. `RUST_LOG` is the operator's dial, not a code change.
 
 ## TLS at Caddy
 
-<!-- verify: deploy/Caddyfile at=day-59 -->
+<!-- verify: deploy/Caddyfile at=review -->
 ```text title="deploy/Caddyfile"
 todo.example.com {
 	encode zstd gzip
+	header Strict-Transport-Security "max-age=31536000; includeSubDomains"
 	reverse_proxy 127.0.0.1:8080
 }
 ```
@@ -89,10 +92,15 @@ app. The app does not need to know about certificates, ports 80/443, or HTTP/2.
 If you use nginx instead, the shape is the same: TLS at the edge, proxy to
 `127.0.0.1:8080`, and set the forwarded headers the app trusts.
 
+The web session cookie is marked `Secure` when the app is served over HTTPS.
+The local lab runs plain HTTP, so the reference code leaves it off; in
+production, set it and keep HSTS enabled at Caddy.
+
 ## The runbook
 
 `deploy/RUNBOOK.md` holds the commands that should not be improvised:
 
+<!-- verify: deploy/RUNBOOK.md at=day-59 -->
 ````markdown title="deploy/RUNBOOK.md"
 ## Backup
 
@@ -127,6 +135,7 @@ server, install the binary first and the message goes away.
 
 <!-- transcripts: authored -->
 ```bash
+$ cargo build --locked --release --bin todo-server
 $ sudo install -m 755 target/release/todo-server /usr/local/bin/todo-server
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable --now todo
@@ -136,10 +145,11 @@ $ curl -fsS http://127.0.0.1:8080/health
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 59: write the deployment files and runbook"
-[main (root-commit) ...] day 59: write the deployment files and runbook
+[main ...] day 59: write the deployment files and runbook
  58 files changed, 7809 insertions(+)
 ...
 $ git log --oneline
@@ -171,6 +181,10 @@ forward fix. Migrations are forward-only.
 
 **The backup is empty.** `sqlite3 .backup` failed silently because the path was
 wrong. Check the file size and run a test restore.
+
+**The restored database has stale sessions.** Copying `todo.db` over a live
+directory can leave an old `todo.db-wal`. Stop the service, remove the `-wal`
+and `-shm` files, then restore the backup.
 
 ## Going deeper: immutable infrastructure
 

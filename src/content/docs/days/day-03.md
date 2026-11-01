@@ -237,13 +237,14 @@ the `is_done()` result; `{:?}` printed the title with quotes because it is a
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git status
 On branch main
 ...
 $ git add -A
 $ git commit -m "day 3: add the task model"
-[main (root-commit) ...] day 3: add the task model
+[main ...] day 3: add the task model
  6 files changed, 117 insertions(+)
 ...
 $ git log --oneline

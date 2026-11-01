@@ -59,6 +59,12 @@ pub async fn load(path: impl AsRef<Path>) -> Result<TodoList, TodoError> {
         .map_err(|error| TodoError::Io(error.to_string()))?
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod async_store;
+```
+
 
 An `async fn` does not run when called; it returns a **future**. The future
 runs when you `.await` it, and the runtime can pause it at an await point to
@@ -112,10 +118,11 @@ test async_store::tests::async_round_trip ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 28: add async store operations"
-[main (root-commit) ...] day 28: add async store operations
+[main ...] day 28: add async store operations
  29 files changed, 2202 insertions(+)
 ...
 $ git log --oneline

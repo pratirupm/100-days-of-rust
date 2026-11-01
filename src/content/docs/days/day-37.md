@@ -84,7 +84,6 @@ $ git log --oneline
 ... day 34: make batch writes transactional
 ... day 33: run versioned migrations
 ... day 32: store tasks in SQLite
-$ git tag part-vi
 ```
 
 ## If something is red

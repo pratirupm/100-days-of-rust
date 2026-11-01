@@ -35,6 +35,14 @@ thiserror = "2"
 `serde` turns Rust values into data formats; `serde_json` is the JSON format.
 The `derive` feature writes the conversion code from attributes.
 
+The cross-process test later needs a temporary directory, so add `tempfile` as
+a dev-dependency:
+
+```toml
+[dev-dependencies]
+tempfile = "3"
+```
+
 ## Make the model serializable
 
 In `src/task.rs`, add the imports and derives:
@@ -55,7 +63,16 @@ file only this app reads.
 
 ## Save and load
 
-Add a private snapshot type and four methods in `src/store.rs`:
+Add the store imports and a private snapshot type, then the four methods in
+`src/store.rs`:
+
+```rust
+use std::fs;
+use std::path::Path;
+
+use serde::{Deserialize, Serialize};
+```
+
 
 <!-- verify: src/store.rs at=day-21 -->
 ```rust title="src/store.rs"
@@ -235,10 +252,11 @@ value drops. Each test gets its own file, so tests can run in parallel.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 21: persist the list as JSON"
-[main (root-commit) ...] day 21: persist the list as JSON
+[main ...] day 21: persist the list as JSON
  26 files changed, 1729 insertions(+)
 ...
 $ git log --oneline

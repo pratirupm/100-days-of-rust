@@ -59,9 +59,11 @@ and `Err(Elapsed)` if it does not. The inner future is cancelled when the
 timeout fires; for `save`, that means the blocking task is left to finish in
 its pool, but the caller gets control back.
 
-`select!` polls both branches. The first to complete wins; the other is
-dropped. `&mut cancel` is important: `select!` needs to poll the receiver
-without consuming it, so the loop can try again.
+`select!` polls both branches. When more than one is ready, Tokio chooses one
+at random by default; the loser is dropped. Add `biased;` at the top of the
+macro to poll in the order written instead. `&mut cancel` is important:
+`select!` needs to poll the receiver without consuming it, so the loop can try
+again.
 
 The return type `&'static str` is a small label for the test and the caller.
 A real shutdown path would return a richer reason.
@@ -125,10 +127,11 @@ test async_store::tests::save_with_timeout_succeeds ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 29: add timeouts and cancellation"
-[main (root-commit) ...] day 29: add timeouts and cancellation
+[main ...] day 29: add timeouts and cancellation
  29 files changed, 2259 insertions(+)
 ...
 $ git log --oneline
@@ -154,8 +157,8 @@ token, or use an async file API that can be cancelled.
 Use a channel that is already cancelled for the deterministic branch, as the
 first test does.
 
-**`oneshot::Receiver` is not `Unpin`.** Use `&mut cancel` in `select!`; the
-macro pins it for you.
+`oneshot::Receiver` is `Unpin`; `&mut` is needed so the receiver is not consumed
+by the macro and can be polled again in a loop.
 
 **No runtime.** `#[tokio::test]` or `#[tokio::main]` is required for
 `.await`.
@@ -171,8 +174,8 @@ and check a token in long loops.
 await. It is the usual tool for graceful shutdown: cancel the token, wait for
 the tasks to finish, then close the listener.
 
-`select!` is biased by default in the order written. If both branches are
-ready, the first one wins. Use `biased;` only when the priority is deliberate;
-an arbitrary priority can starve a branch.
+`select!` is random by default when several branches are ready. Add `biased;`
+only when the priority is deliberate; an arbitrary priority can starve a
+branch.
 
 <div class="day-tracker" data-day="29"></div>

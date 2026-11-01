@@ -31,8 +31,8 @@ leaked credential and a vulnerable dependency.
 - a user reports a change they did not make;
 - the dependency's maintainer announces a compromise.
 
-Detection is the hard part. The app's audit pipeline (SBOM, advisories, secret
-scan) is the tripwire.
+Detection is the hard part. The app's audit pipeline covers the SBOM and
+advisories; add the secret scan before relying on it.
 
 ## Contain
 
@@ -96,6 +96,14 @@ are the tripwires. The runbook is in `SECURITY.md` and `deploy/RUNBOOK.md`.
 The incident process is not code, but it is part of the product. A fast rotate
 and a clear message are worth more than a perfect root-cause analysis in the
 first hour.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 88: security incidents"
+```
 
 ## If something went wrong
 

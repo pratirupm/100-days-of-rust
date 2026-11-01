@@ -145,6 +145,14 @@ $ grpcurl -plaintext 127.0.0.1:50051 tasks.v1.Tasks/ListTasks
 proto files. Reflection is convenient in development; a production server can
 disable it.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 71: gRPC"
+```
+
 ## If something went wrong
 
 **`failed to connect`.** The server is not listening, or the client uses the
@@ -174,7 +182,7 @@ internal, typed, high-throughput calls. A gateway can expose gRPC as REST
 The app's REST API is the browser's path. A gRPC service is a natural fit for
 the event consumers and a future mobile client.
 
-The next lesson adds WebSockets: a persistent bidirectional channel for live
-task updates.
+The next lesson puts this contract behind a tonic service in the app; the one
+after that adds WebSockets for live updates.
 
 <div class="day-tracker" data-day="71"></div>

@@ -39,9 +39,9 @@ fn csrf(jar: &CookieJar) -> (String, CookieJar) {
 }
 ```
 
-The CSRF cookie is deliberately **not** `HttpOnly`: the template needs the
-value, and a same-site attacker cannot read it. The session cookie is
-`HttpOnly`; JavaScript must not see it.
+The CSRF cookie is deliberately **not** `HttpOnly`: the double-submit pattern
+compares it with a value the page can read, and it is not a credential on its
+own. The session cookie is `HttpOnly`; JavaScript must not see it.
 
 `SameSite=Lax` is a second layer: the browser does not send the cookie on most
 cross-site POSTs. The token is the layer that works even when `SameSite` is not
@@ -75,8 +75,10 @@ The login handler creates a session and sets the cookie:
 
 The token is stored hashed; the browser gets the raw token once. `HttpOnly`
 keeps it away from scripts, `SameSite=Lax` limits cross-site sends, and the
-seven-day expiry is enforced by the session query. `Secure` is added when the
-app is served over HTTPS; a local HTTP server would drop a `Secure` cookie.
+seven-day expiry is enforced by the session query. In production, add
+`.secure(true)` and serve only over HTTPS; a local HTTP server would drop a
+`Secure` cookie, so the lab leaves it off. The Caddyfile in the deployment
+lesson adds HSTS with the same intent.
 
 The login rotates the session: a new token is created on every login. An old
 token from before the login is not reused, which closes session fixation.
@@ -164,10 +166,11 @@ test web::tests::login_sets_a_session_cookie ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 46: require CSRF tokens and secure cookies"
-[main (root-commit) ...] day 46: require CSRF tokens and secure cookies
+[main ...] day 46: require CSRF tokens and secure cookies
  44 files changed, 5979 insertions(+)
 ...
 $ git log --oneline

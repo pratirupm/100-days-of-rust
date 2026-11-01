@@ -12,8 +12,9 @@ bullets:
   - reconnect and refetch on the client.
 ---
 
-The socket server works. This lesson adds it to the app, with the rule that
-matters: a connection sees only its owner's tasks.
+The socket server works. This lesson adds it to your copy of the app, with the
+rule that matters: a connection sees only its owner's tasks. The reference app
+does not register `/ws` yet.
 
 ## The connection
 
@@ -140,6 +141,14 @@ read path.
 
 The metrics gain a `websocket_connections` gauge. A connection count that only
 grows is a leak or a client that never closes.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 74: live task updates"
+```
 
 ## If something went wrong
 

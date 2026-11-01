@@ -12,8 +12,9 @@ bullets:
   - run a tonic server on an ephemeral port in a test.
 ---
 
-The proto is the contract. This lesson implements it with the app's store and
-auth, then tests the generated client.
+The proto is the contract. This lesson shows how to implement it with the app's
+store and auth, then test the generated client. The reference app does not ship
+the tonic service; add the files in your copy.
 
 ## The service struct
 
@@ -127,6 +128,14 @@ in both; a shared `Access` helper is the way to avoid drift.
 
 The TUI can use either transport. The REST client is smaller; the gRPC client
 is typed. Keep one until a second consumer needs the other.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 72: gRPC in the app"
+```
 
 ## If something went wrong
 

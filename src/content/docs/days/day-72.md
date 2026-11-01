@@ -132,6 +132,14 @@ in both; a shared `Access` helper is the way to avoid drift.
 The TUI can use either transport. The REST client is smaller; the gRPC client
 is typed. Keep one until a second consumer needs the other.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 72: gRPC in the app"
+```
+
 ## If something went wrong
 
 **The service trait is not implemented.** The generated trait name or method

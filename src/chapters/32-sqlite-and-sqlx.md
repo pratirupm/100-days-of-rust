@@ -55,7 +55,23 @@ for that.
 
 ## Open the database
 
-Create `src/db.rs`:
+Create `src/db.rs` with the imports and the store type:
+
+```rust
+use std::str::FromStr;
+
+use sqlx::sqlite::{SqliteConnectOptions, SqlitePoolOptions, SqliteRow};
+use sqlx::{Row, SqlitePool};
+
+use crate::error::TodoError;
+use crate::task::{Status, Task};
+
+pub struct SqliteStore {
+    pool: SqlitePool,
+}
+```
+
+The methods below go inside `impl SqliteStore`:
 
 <!-- verify: src/db.rs at=day-32 -->
 ```rust title="src/db.rs"
@@ -79,6 +95,13 @@ Create `src/db.rs`:
         Ok(())
     }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod db;
+pub use db::SqliteStore;
+```
+
 
 `SqliteConnectOptions` parses a URL such as `sqlite:///tmp/todo.db`.
 `create_if_missing(true)` makes the first run work. `SqlitePoolOptions` keeps
@@ -213,9 +236,19 @@ missing id would look like success.
     }
 ```
 
-`store()` creates a temporary directory, builds a `sqlite://` URL, opens the
-database, and returns the `TempDir` so it lives as long as the store. Each
-test gets its own file.
+The test helper creates a temporary directory, builds a `sqlite://` URL, opens
+the database, and returns the `TempDir` so it lives as long as the store:
+
+```rust
+async fn store() -> (tempfile::TempDir, SqliteStore) {
+    let dir = tempfile::tempdir().unwrap();
+    let url = format!("sqlite://{}", dir.path().join("todo.db").display());
+    let store = SqliteStore::open(&url).await.unwrap();
+    (dir, store)
+}
+```
+
+Each test gets its own file.
 
 ## Run it
 
@@ -230,10 +263,11 @@ test db::tests::add_list_and_find ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 32: store tasks in SQLite"
-[main (root-commit) ...] day 32: store tasks in SQLite
+[main ...] day 32: store tasks in SQLite
  32 files changed, 3559 insertions(+)
 ...
 $ git log --oneline

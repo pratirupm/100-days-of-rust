@@ -138,6 +138,14 @@ transaction; the SQLite course path does not need Kafka.
 The TUI and web UI do not know about events. They read the task; the event is
 for other services.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 70: task events in the app"
+```
+
 ## If something went wrong
 
 **Events are missing.** The outbox row was not in the same transaction, or the

@@ -85,9 +85,9 @@ pub fn binary_search(values: &[i32], target: i32) -> Option<usize> {
 window. When `values[mid] < target`, the target can only be to the right, so
 `low = mid + 1`. Otherwise it is at `mid` or to the left, so `high = mid`.
 
-`mid = low + (high - low) / 2` avoids overflow in languages where `low + high`
-can exceed the integer range. In Rust, `usize` wraps in release mode; the safer
-form is a good habit.
+`mid = low + (high - low) / 2` avoids overflow when `low + high` would exceed
+the integer range. Rust panics on overflow in debug builds; release builds
+depend on the `overflow-checks` setting, so the safer form is a good habit.
 
 The loop ends when `low == high`; an empty range means the target is absent.
 
@@ -170,8 +170,8 @@ searched by id.
 
 ## Stability and the app
 
-The app sorts tasks for display. A stable sort keeps the original order for
-equal keys:
+The reference app prints tasks in insertion order; sorting them for display is
+an extension. A stable sort keeps the original order for equal keys:
 
 - tasks with the same due date keep their id order;
 - a secondary key (title) makes the order deterministic;

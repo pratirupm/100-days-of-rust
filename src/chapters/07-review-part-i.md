@@ -88,7 +88,6 @@ $ git log --oneline
 ... day 3: add the task model
 ... day 2: add the first test
 ... day 1: create the todo crate
-$ git tag part-i
 ```
 
 `git log --oneline` shows one line per commit; the hash is different on every

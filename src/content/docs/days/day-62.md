@@ -116,6 +116,14 @@ The pod does not replace the deployment unit. systemd starts the binary on a
 single host; a pod starts containers. Both run the same image and the same
 environment.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 62: pods and local stacks"
+```
+
 ## If something went wrong
 
 **The pod will not start.** The infra container is missing or the name is in

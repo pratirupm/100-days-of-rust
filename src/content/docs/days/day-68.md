@@ -133,6 +133,14 @@ API? It calls the store directly today; move it to the same cache layer or let
 it read the database. A cache is not free consistency; one client with a
 short TTL is easier to reason about than two.
 
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 68: redis in the app"
+```
+
 ## If something went wrong
 
 **Every request is a miss.** The key changes per request (a timestamp or a

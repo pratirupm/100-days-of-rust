@@ -45,6 +45,13 @@ pub trait Store: Send + Sync {
     async fn done(&self, id: u32) -> Result<(), TodoError>;
 }
 ```
+Declare it in `src/lib.rs`:
+
+```rust
+pub mod storage;
+pub use storage::Store;
+```
+
 
 A trait is a contract. The app's core needs three operations, not a database
 handle, a connection pool, or a file path. `Store: Send + Sync` says an
@@ -164,6 +171,10 @@ deliberate next steps, not hidden behavior.
     }
 ```
 
+Rename the test helper from the previous lesson to `test_store`; the local
+binding is also named `store`, and the shadowing otherwise makes the call look
+like a value.
+
 The first test proves the format round-trips. The second proves the trait is
 usable generically. `test_store()` creates a new temporary database each time,
 so the two `_dir` values keep their files alive independently.
@@ -180,10 +191,11 @@ test db::tests::the_store_trait_is_generic ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 36: abstract the store and import JSON"
-[main (root-commit) ...] day 36: abstract the store and import JSON
+[main ...] day 36: abstract the store and import JSON
  35 files changed, 3940 insertions(+)
 ...
 $ git log --oneline
@@ -216,8 +228,9 @@ strings. A backfill migration can give them real UUIDs.
 
 The `Store` trait is the seam between the app and its database. It is small on
 purpose: add, list, done. A Postgres store, an in-memory store, and a fake for
-tests can all implement it. The API handlers in the next part depend on the
-trait, not on SQLite.
+tests can all implement it. The reference API still names `SqliteStore` because
+it has only one backend; a handler can switch to a generic `S: Store` when a
+second backend actually exists.
 
 The trait is not free. Every new operation goes in the trait and in every
 implementation; a too-large trait becomes a burden. Start with the operations

@@ -125,10 +125,11 @@ the point. The test protects the rule, not the test file.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 17: pin a compile-fail case"
-[main (root-commit) ...] day 17: pin a compile-fail case
+[main ...] day 17: pin a compile-fail case
  23 files changed, 1308 insertions(+)
 ...
 $ git log --oneline

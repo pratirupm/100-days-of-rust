@@ -92,7 +92,6 @@ $ git log --oneline
 ... day 40: wrap the API in middleware
 ... day 39: build task CRUD endpoints
 ... day 38: serve a health endpoint
-$ git tag part-vii
 ```
 
 ## If something is red

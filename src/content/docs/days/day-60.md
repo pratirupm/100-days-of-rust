@@ -119,10 +119,11 @@ underneath with data structures and algorithms.
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 60: add release profiles and packaging"
-[main (root-commit) ...] day 60: add release profiles and packaging
+[main ...] day 60: add release profiles and packaging
  59 files changed, 7833 insertions(+)
 ...
 $ git log --oneline

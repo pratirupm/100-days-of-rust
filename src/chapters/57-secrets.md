@@ -135,10 +135,11 @@ test secret::tests::expose_returns_the_value ... ok
 
 ## Save your work
 
+<!-- transcripts: authored -->
 ```bash
 $ git add -A
 $ git commit -m "day 57: add a self-redacting secret type"
-[main (root-commit) ...] day 57: add a self-redacting secret type
+[main ...] day 57: add a self-redacting secret type
  51 files changed, 7644 insertions(+)
 ...
 $ git log --oneline

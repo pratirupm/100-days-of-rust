@@ -12,8 +12,9 @@ bullets:
   - alert on the burn rate, not a single spike.
 ---
 
-The metrics endpoint has two counters. This lesson adds latency and turns the
-numbers into a dashboard and one alert.
+The metrics endpoint has two counters. This lesson designs the latency metric,
+the dashboard, and the alert; the reference image keeps the two counters until
+you add the histogram.
 
 ## The histogram
 
@@ -112,6 +113,14 @@ lag comes from the broker; the app exports the publish failures.
 
 The metrics crate can replace the hand-written counters. The hand-written
 version shows the format; the library handles histograms and labels.
+
+## Save your work
+
+<!-- transcripts: authored -->
+```bash
+$ git add -A
+$ git commit -m "day 84: dashboards and alerts for the app"
+```
 
 ## If something went wrong
 
