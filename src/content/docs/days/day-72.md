@@ -2,7 +2,7 @@
 title: "Day 72 — gRPC in the app"
 description: "Put the Task service behind tonic, reuse the store and session logic, and test the generated client against a real server. — Day 72 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 12
 day: 72
 ---
 

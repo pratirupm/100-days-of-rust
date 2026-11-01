@@ -2,7 +2,7 @@
 title: "Day 78 — Backups and jobs in the cloud"
 description: "Put the SQLite snapshot in S3, send notification jobs through SQS, and keep both behind small traits so tests need no cloud. — Day 78 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 18
 day: 78
 ---
 

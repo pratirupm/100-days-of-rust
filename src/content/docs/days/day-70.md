@@ -2,7 +2,7 @@
 title: "Day 70 — Task events in the app"
 description: "Publish task events through an outbox, key them by task id, and make the consumer idempotent. — Day 70 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 10
 day: 70
 ---
 

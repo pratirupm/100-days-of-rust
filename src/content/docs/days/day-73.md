@@ -2,7 +2,7 @@
 title: "Day 73 — WebSockets"
 description: "Upgrade an HTTP connection to a WebSocket, send frames both ways, and handle ping, close, and backpressure. — Day 73 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 13
 day: 73
 ---
 

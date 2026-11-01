@@ -2,7 +2,7 @@
 title: "Day 75 — Kubernetes"
 description: "Run a single-node cluster with Kind or k3d, deploy the server with a Deployment and Service, and give the database a persistent volume. — Day 75 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 15
 day: 75
 ---
 

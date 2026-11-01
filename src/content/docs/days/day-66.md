@@ -2,7 +2,7 @@
 title: "Day 66 — PostgreSQL in the app"
 description: "Put a PostgresStore behind the Store trait, select it by URL, and run the same owner-scoped tests against both databases. — Day 66 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 6
 day: 66
 ---
 

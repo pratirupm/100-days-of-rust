@@ -2,7 +2,7 @@
 title: "Day 93 — Hash and ordered maps"
 description: "Count with a HashMap, range-query with a BTreeMap, and choose between them for tags and due dates. — Day 93 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 3
 day: 93
 ---
 

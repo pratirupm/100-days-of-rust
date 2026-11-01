@@ -2,7 +2,7 @@
 title: "Day 76 — The app on Kubernetes"
 description: "Turn the local manifests into the app's deployment: config, secrets, a migration job, probes, and the WebSocket caveat. — Day 76 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 16
 day: 76
 ---
 

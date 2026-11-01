@@ -2,7 +2,7 @@
 title: "Day 84 — Dashboards and alerts for the app"
 description: "Add a latency histogram, write the RED queries, and make one alert that follows the SLO instead of the CPU. — Day 84 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 24
 day: 84
 ---
 

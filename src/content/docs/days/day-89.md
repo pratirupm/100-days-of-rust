@@ -2,7 +2,7 @@
 title: "Day 89 — Operations"
 description: "Run the service on a schedule: SLOs, on-call, backups, capacity, and the boring work that keeps it alive. — Day 89 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 29
 day: 89
 ---
 

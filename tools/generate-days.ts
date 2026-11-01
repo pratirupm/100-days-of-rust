@@ -69,8 +69,8 @@ for (const file of files) {
 	}
 	if (!front.title) throw new Error(`${file}: front matter needs title`);
 
-	const hidden = day > 60;
-	const sidebar = hidden ? 'sidebar:\n  hidden: true' : `sidebar:\n  order: ${day}`;
+	const order = day <= 60 ? day : day <= 90 ? day - 60 : day - 90;
+	const sidebar = `sidebar:\n  order: ${order}`;
 	const isReview = front.review === 'true';
 	const isPartNumber = front.part ? /^[IVX]+$/.test(front.part) : false;
 	const partLabel = front.part

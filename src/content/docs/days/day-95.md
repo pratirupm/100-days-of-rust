@@ -2,7 +2,7 @@
 title: "Day 95 — Linked structures in Rust"
 description: "Build a singly linked list with `Box` and `Option`, then measure why the obvious structure is rarely the right default in Rust. — Day 95 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 5
 day: 95
 ---
 

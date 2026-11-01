@@ -2,7 +2,7 @@
 title: "Day 88 — Security incidents"
 description: "Detect, contain, eradicate, and learn — a small incident runbook for a leaked token or a vulnerable dependency. — Day 88 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 28
 day: 88
 ---
 

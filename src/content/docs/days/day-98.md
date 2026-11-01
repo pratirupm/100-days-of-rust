@@ -2,7 +2,7 @@
 title: "Day 98 — Shortest paths and topological sort"
 description: "Order a dependency graph with Kahn's algorithm, reject cycles, and find weighted shortest paths with Dijkstra. — Day 98 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 8
 day: 98
 ---
 

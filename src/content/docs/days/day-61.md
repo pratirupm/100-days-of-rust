@@ -2,7 +2,7 @@
 title: "Day 61 — Containers with Podman"
 description: "Package the server as an OCI image, run it rootless with Podman, and keep the database in a volume. — Day 61 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 1
 day: 61
 ---
 

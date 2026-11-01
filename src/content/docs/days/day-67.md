@@ -2,7 +2,7 @@
 title: "Day 67 — Redis"
 description: "Run Redis locally, learn the strings, hashes, and TTLs the app needs, and see where a cache helps — and where it lies. — Day 67 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 7
 day: 67
 ---
 

@@ -2,7 +2,7 @@
 title: "Day 85 — Performance and load"
 description: "Measure latency and throughput under load, find the saturation point, and profile before changing a line. — Day 85 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 25
 day: 85
 ---
 

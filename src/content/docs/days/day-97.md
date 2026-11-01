@@ -2,7 +2,7 @@
 title: "Day 97 — Graphs: BFS and DFS"
 description: "Model tasks that depend on other tasks, traverse the graph breadth-first and depth-first, and keep the visited set honest. — Day 97 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 7
 day: 97
 ---
 

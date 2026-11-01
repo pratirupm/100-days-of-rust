@@ -2,7 +2,7 @@
 title: "Day 74 — Live task updates"
 description: "Add an authenticated /ws endpoint, broadcast owner-scoped task events, and let the browser refresh without polling. — Day 74 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 14
 day: 74
 ---
 

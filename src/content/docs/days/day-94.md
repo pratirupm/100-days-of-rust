@@ -2,7 +2,7 @@
 title: "Day 94 — Stacks, queues, and deques"
 description: "Use a stack for the most recent change, a queue for the next thing to do, and a deque when both ends are busy. — Day 94 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 4
 day: 94
 ---
 

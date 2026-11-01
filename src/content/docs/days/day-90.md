@@ -2,7 +2,7 @@
 title: "Day 90 — The production capstone"
 description: "Run the whole stack, walk the production checklist, and close the 30-day track. — Day 90 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 30
 day: 90
 ---
 

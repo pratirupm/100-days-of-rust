@@ -2,7 +2,7 @@
 title: "Day 99 — Sorting and searching"
 description: "Write insertion sort and binary search by hand, then use the standard library's sort and binary_search with the right bounds. — Day 99 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 9
 day: 99
 ---
 

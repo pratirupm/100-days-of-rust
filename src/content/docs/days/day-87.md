@@ -2,7 +2,7 @@
 title: "Day 87 — Supply chain"
 description: "Generate an SBOM, run the advisory and license checks, and sign what you ship. — Day 87 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 27
 day: 87
 ---
 

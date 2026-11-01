@@ -2,7 +2,7 @@
 title: "Day 80 — The notification service"
 description: "Build a small service that consumes task events, deduplicates them, and reports its own health and lag. — Day 80 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 20
 day: 80
 ---
 

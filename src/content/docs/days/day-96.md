@@ -2,7 +2,7 @@
 title: "Day 96 — Trees and heaps"
 description: "Keep the k largest values with a binary heap, order tasks by due day, and see when a tree beats a sorted vector. — Day 96 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 6
 day: 96
 ---
 

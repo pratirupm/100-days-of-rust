@@ -2,7 +2,7 @@
 title: "Day 83 — Observability at scale"
 description: "Turn logs, metrics, and traces into answers: RED metrics, SLOs, dashboards, and alerts that page a human only when they should. — Day 83 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 23
 day: 83
 ---
 

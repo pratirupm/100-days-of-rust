@@ -2,7 +2,7 @@
 title: "Day 71 — gRPC"
 description: "Define a typed task service in Protobuf, generate a tonic server and client, and compare the contract with REST. — Day 71 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 11
 day: 71
 ---
 

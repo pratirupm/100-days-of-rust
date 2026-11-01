@@ -2,7 +2,7 @@
 title: "Day 86 — The optimization pass"
 description: "Record a baseline, change one thing at a time, and keep only the optimizations the numbers support. — Day 86 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 26
 day: 86
 ---
 

@@ -1,4 +1,5 @@
 // @ts-check
+import { readdirSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
@@ -17,6 +18,27 @@ const isBuild = process.env.NODE_ENV === 'production';
 // https://pratirupm.github.io/100-days-of-rust/
 const site = 'https://pratirupm.github.io';
 const base = '/100-days-of-rust';
+
+// Sidebar labels come from the chapter sources, so the navigation never drifts
+// from the day titles. The chapter files are part of the repository and exist
+// at build time.
+const chapterTitles = new Map();
+const chaptersDir = new URL('./src/chapters/', import.meta.url);
+for (const file of readdirSync(chaptersDir)) {
+	const match = file.match(/^(\d+)-.+\.md$/);
+	if (!match) continue;
+	const text = readFileSync(new URL(file, chaptersDir), 'utf8');
+	const title = text.match(/^title:\s*(.+)$/m)?.[1]?.trim().replace(/^["']|["']$/g, '');
+	if (title) chapterTitles.set(Number(match[1]), title);
+}
+
+const dayItem = (day) => ({
+	label: `Day ${day} — ${chapterTitles.get(day) ?? 'Lesson'}`,
+	slug: `days/day-${String(day).padStart(2, '0')}`,
+});
+
+const dayItems = (from, to) =>
+	Array.from({ length: to - from + 1 }, (_, index) => dayItem(from + index));
 
 export default defineConfig({
 	site,
@@ -109,17 +131,17 @@ export default defineConfig({
 				{
 					label: 'The 60 days',
 					collapsed: true,
-					items: [{ autogenerate: { directory: 'days' } }],
+					items: [{ label: 'Overview', slug: 'days' }, ...dayItems(1, 60)],
 				},
 				{
 					label: 'Production ground',
 					collapsed: true,
-					items: [{ autogenerate: { directory: 'production' } }],
+					items: [{ label: 'Overview', slug: 'production' }, ...dayItems(61, 90)],
 				},
 				{
 					label: 'Data structures & algorithms',
 					collapsed: true,
-					items: [{ autogenerate: { directory: 'dsa' } }],
+					items: [{ label: 'Overview', slug: 'dsa' }, ...dayItems(91, 100)],
 				},
 				{
 					label: 'Appendices',

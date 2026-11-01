@@ -2,7 +2,7 @@
 title: "Day 82 — Retries and idempotency in the app"
 description: "Add a retry policy to the client, an idempotency table to the API, and a version check to the update path. — Day 82 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 22
 day: 82
 ---
 

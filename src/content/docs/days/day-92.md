@@ -2,7 +2,7 @@
 title: "Day 92 — Vectors and slices underneath"
 description: "Look inside a `Vec` — a pointer, a length, and a capacity — and see when growth copies and when a slice avoids it. — Day 92 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 2
 day: 92
 ---
 

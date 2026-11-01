@@ -2,7 +2,7 @@
 title: "Day 65 — PostgreSQL"
 description: "Run PostgreSQL in a container, write a real schema with an index, and see where the SQLite store swaps behind the trait. — Day 65 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 5
 day: 65
 ---
 

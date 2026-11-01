@@ -2,7 +2,7 @@
 title: "Day 68 — Redis in the app"
 description: "Add a cache-aside read for the task list and a Redis-backed login limiter, with the failure paths designed first. — Day 68 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 8
 day: 68
 ---
 

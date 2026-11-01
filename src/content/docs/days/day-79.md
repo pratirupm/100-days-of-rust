@@ -2,7 +2,7 @@
 title: "Day 79 — Microservices"
 description: "Split one honest seam out of the app — notifications — and pay the operational bill for the split. — Day 79 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 19
 day: 79
 ---
 

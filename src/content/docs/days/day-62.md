@@ -2,7 +2,7 @@
 title: "Day 62 — Pods and local stacks"
 description: "Group the server and its future services in a Podman pod, share a network namespace, and bring the stack up and down as one unit. — Day 62 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 2
 day: 62
 ---
 

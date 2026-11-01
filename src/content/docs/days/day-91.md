@@ -2,7 +2,7 @@
 title: "Day 91 — Complexity and measurement"
 description: "Count the steps an algorithm takes, name the growth curve, and measure it with criterion — including the case where the compiler erases the loop. — Day 91 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 1
 day: 91
 ---
 

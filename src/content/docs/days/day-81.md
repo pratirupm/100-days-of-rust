@@ -2,7 +2,7 @@
 title: "Day 81 — Distributed systems"
 description: "Treat the network as a failure source: timeouts, retries with jitter, idempotency, ordering, and the limits of exactly-once. — Day 81 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 21
 day: 81
 ---
 

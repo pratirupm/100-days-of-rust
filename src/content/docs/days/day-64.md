@@ -2,7 +2,7 @@
 title: "Day 64 — CI matrices and releases"
 description: "Run the check on more than one target, build artifacts on a tag, and publish checksums with the release. — Day 64 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 4
 day: 64
 ---
 

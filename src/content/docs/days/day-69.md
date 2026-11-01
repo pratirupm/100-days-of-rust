@@ -2,7 +2,7 @@
 title: "Day 69 — Kafka and Redpanda"
 description: "Run a single-node Redpanda broker, create a topic, and produce and consume task events. — Day 69 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 9
 day: 69
 ---
 

@@ -2,7 +2,7 @@
 title: "Day 77 — AWS with LocalStack"
 description: "Run LocalStack, create an S3 bucket and an SQS queue, and learn the AWS shapes without a cloud bill. — Day 77 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 17
 day: 77
 ---
 

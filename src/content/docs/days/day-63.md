@@ -2,7 +2,7 @@
 title: "Day 63 — CI/CD"
 description: "Put the check on every push: format, clippy, and the full suite in GitHub Actions, with a cache that makes it fast. — Day 63 of 100 Days of Rust."
 sidebar:
-  hidden: true
+  order: 3
 day: 63
 ---
 
