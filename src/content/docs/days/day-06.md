@@ -226,6 +226,11 @@ src/
 └── task.rs     Task and Status
 ```
 
+Move each day's tests into the module they test: the task tests into
+`task.rs`, the list tests into `store.rs`, and the error test into `error.rs`.
+Each module keeps its own `#[cfg(test)] mod tests` block, so `cargo test` still
+finds them.
+
 A package can have both a library and a binary. The library is what tests and
 other crates use; the binary is the program. `main.rs` imports the library:
 

@@ -19,7 +19,7 @@ day: 71
 REST is a resource model over HTTP/1.1 with JSON. gRPC is a typed method call
 over HTTP/2 with Protobuf. Both are contracts; they make different trade-offs.
 
-Today the app gets a gRPC task service beside the REST API.
+Today your copy gets a gRPC task service beside the REST API.
 
 ## The contract
 
