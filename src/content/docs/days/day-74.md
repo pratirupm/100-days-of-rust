@@ -16,8 +16,9 @@ day: 74
 
 ---
 
-The socket server works. This lesson adds it to the app, with the rule that
-matters: a connection sees only its owner's tasks.
+The socket server works. This lesson adds it to your copy of the app, with the
+rule that matters: a connection sees only its owner's tasks. The reference app
+does not register `/ws` yet.
 
 ## The connection
 

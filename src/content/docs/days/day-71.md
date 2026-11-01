@@ -132,7 +132,7 @@ mobile client that wants a typed contract.
 Both adapters call the same `Store` trait and the same auth/session logic. The
 transport is a layer, not a second domain.
 
-## Run the lab
+## After you add the binary
 
 <!-- transcripts: authored -->
 ```bash
@@ -141,8 +141,9 @@ gRPC listening on 127.0.0.1:50051
 $ grpcurl -plaintext 127.0.0.1:50051 tasks.v1.Tasks/ListTasks
 ```
 
-`grpcurl` uses reflection; the server must enable it or the client needs the
-proto files. Reflection is convenient in development; a production server can
+The reference app has no `todo-grpc` binary yet; add the proto, `build.rs`, and
+the service first. `grpcurl` uses reflection; the server must enable it or the
+client needs the proto files. Reflection is convenient in development; a production server can
 disable it.
 
 ## Save your work

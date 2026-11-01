@@ -62,7 +62,7 @@ costs debuggability.
 
 ## The client
 
-`websocat` is a quick CLI client:
+Once the route exists in your copy, `websocat` is a quick CLI client:
 
 <!-- transcripts: authored -->
 ```bash

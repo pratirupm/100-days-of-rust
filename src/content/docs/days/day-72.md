@@ -16,8 +16,9 @@ day: 72
 
 ---
 
-The proto is the contract. This lesson implements it with the app's store and
-auth, then tests the generated client.
+The proto is the contract. This lesson shows how to implement it with the app's
+store and auth, then test the generated client. The reference app does not ship
+the tonic service; add the files in your copy.
 
 ## The service struct
 

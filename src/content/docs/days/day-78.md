@@ -16,8 +16,9 @@ day: 78
 
 ---
 
-LocalStack ran the services. This lesson puts them behind the app's own small
-traits and wires the background work.
+LocalStack ran the services. This lesson puts them behind small traits and
+wires the background work. The reference app has no AWS SDK; this is the shape
+you add in your copy.
 
 ## The traits
 
@@ -44,6 +45,7 @@ consumer depend on the traits.
 
 ```rust
 async fn backup(store: &SqliteStore, objects: &dyn ObjectStore) -> Result<(), TodoError> {
+    // Add `snapshot_bytes` to SqliteStore with `VACUUM INTO` and `fs::read`.
     let bytes = store.snapshot_bytes().await?;
     let key = format!("todo-{}.db", Utc::now().format("%Y%m%dT%H%M%SZ"));
     objects.put(&key, bytes.clone()).await?;

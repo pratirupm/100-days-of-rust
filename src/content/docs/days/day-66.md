@@ -108,7 +108,7 @@ async fn conformance<S: Store>(store: &S) {
 Run it with `SqliteStore` in the normal test, and with `PostgresStore` in an
 integration test gated by `DATABASE_URL`. The same behavior, two backends.
 
-## Run the Postgres tests
+## Test the adapter you add
 
 <!-- transcripts: authored -->
 ```bash
@@ -119,7 +119,9 @@ $ DATABASE_URL=postgres://todo:todo@127.0.0.1:55432/todo_test \
     cargo test --test postgres_store
 ```
 
-The test creates a database or truncates the tables before each case. Do not
+The reference app has no Postgres adapter yet; add `PostgresStore`, the
+`migrations-postgres` directory, and the `tests/postgres_store.rs` target
+first. The test creates a database or truncates the tables before each case. Do not
 point it at the production database; a test that deletes data is a production
 incident waiting to happen.
 

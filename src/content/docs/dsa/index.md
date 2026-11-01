@@ -45,4 +45,6 @@ them and tie the structures back to the app wherever they fit.
 - [99 — Sorting and searching](/100-days-of-rust/days/day-99/)
 - [100 — Interview-shaped practice](/100-days-of-rust/days/day-100/)
 
-All ten days are written, with tests and benchmarks in the `dsa` crate.
+All ten days are written, with tests and benchmarks in the `dsa` crate. The
+reference crate is complete from the start; the days are reading milestones,
+and the tags are milestones for your own copy, not ten separate commits.

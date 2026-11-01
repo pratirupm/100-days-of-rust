@@ -172,7 +172,9 @@ A Secret is base64, not encryption. Use `kubectl create secret` from a file,
 enable encryption at rest, and restrict RBAC. The app reads the value as an
 environment variable; the manifest is not the secret store.
 
-## Rollout
+Save the four blocks above as `deploy/k8s/deployment.yaml`,
+`deploy/k8s/service.yaml`, `deploy/k8s/pvc.yaml`, and
+`deploy/k8s/config.yaml`, then roll out:
 
 <!-- transcripts: authored -->
 ```bash
