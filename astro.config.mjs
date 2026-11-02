@@ -129,19 +129,32 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Start here', slug: 'start-here' },
 				{
-					label: 'The 60 days',
+					label: 'The days',
 					collapsed: true,
-					items: [{ label: 'Overview', slug: 'days' }, ...dayItems(1, 60)],
-				},
-				{
-					label: 'Production ground',
-					collapsed: true,
-					items: [{ label: 'Overview', slug: 'production' }, ...dayItems(61, 90)],
-				},
-				{
-					label: 'Data structures & algorithms',
-					collapsed: true,
-					items: [{ label: 'Overview', slug: 'dsa' }, ...dayItems(91, 100)],
+					items: [
+						{ label: 'Overview', slug: 'days' },
+						{
+							label: 'Days 1–60',
+							collapsed: true,
+							items: dayItems(1, 60),
+						},
+						{
+							label: 'Days 61–90',
+							collapsed: true,
+							items: [
+								{ label: 'Production ground overview', slug: 'production' },
+								...dayItems(61, 90),
+							],
+						},
+						{
+							label: 'Days 91–100',
+							collapsed: true,
+							items: [
+								{ label: 'DSA overview', slug: 'dsa' },
+								...dayItems(91, 100),
+							],
+						},
+					],
 				},
 				{
 					label: 'Appendices',
